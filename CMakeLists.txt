@@ -5,6 +5,8 @@ project(Application VERSION 0.1.0)
 include(CTest)
 enable_testing()
 
+add_subdirectory(dependencies/spdlog)
+
 file(GLOB SOURCE_FILES
     dependencies/glad/src/glad.c
     src/**/*.cpp
@@ -25,6 +27,7 @@ target_precompile_headers(
     PUBLIC
     src/Core/global.hpp
 )
+target_link_libraries(Application PRIVATE spdlog::spdlog)
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

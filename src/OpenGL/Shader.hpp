@@ -29,5 +29,13 @@ namespace HYT::GL
 
     class ShaderProgram
     {
+    public:
+        ShaderProgram(Shader &shaders...);
+        ~ShaderProgram();
+
+        GLuint ID();
+
+    protected:
+        GLuint m_id;
     };
 } // namespace HYT::GL

@@ -4,3 +4,6 @@
 [submodule "dependencies/glfw"]
 	path = dependencies/glfw
 	url = https://gitclone.com/github.com/glfw/glfw.git
+[submodule "dependencies/glm"]
+	path = dependencies/glm
+	url = https://gitclone.com/github.com/g-truc/glm

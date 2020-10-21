@@ -26,6 +26,7 @@ include_directories(
     src/Core
     src/OpenGL
     dependencies/glad/include
+    dependencies/glm/glm
 )
 
 set_source_files_properties(dependencies/glad/src/glad.c PROPERTIES SKIP_PRECOMPILE_HEADERS on)

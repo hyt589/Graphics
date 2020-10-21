@@ -2,6 +2,7 @@
 
 #include "global.hpp"
 #include "Layer.hpp"
+#include "Window.hpp"
 
 namespace HYT
 {
@@ -22,5 +23,6 @@ namespace HYT
         std::vector<Layer *> m_layers;
         std::vector<Layer *> m_overlays;
         std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTime;
+        std::unique_ptr<Window> window;
     };
 } // namespace HYT

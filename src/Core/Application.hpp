@@ -21,5 +21,6 @@ namespace HYT
         EventQueue m_eventQueue;
         std::vector<Layer *> m_layers;
         std::vector<Layer *> m_overlays;
+        std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTime;
     };
 } // namespace HYT

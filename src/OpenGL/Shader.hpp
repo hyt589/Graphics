@@ -1,6 +1,6 @@
 #pragma once
 
-#include "global.hpp"
+#include "Core.hpp"
 #include <glad/glad.h>
 
 namespace HYT::GL

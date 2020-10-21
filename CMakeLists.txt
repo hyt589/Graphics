@@ -24,6 +24,7 @@ file(GLOB SOURCE_FILES
 include_directories(
     src/App
     src/Core
+    src/OpenGL
     dependencies/glad/include
 )
 

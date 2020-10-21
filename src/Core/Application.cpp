@@ -3,6 +3,29 @@
 
 namespace HYT
 {
+    EventQueue Application::s_eventQueue;
+    Application * Application::s_instance;
+
+    Application::Application()
+    {
+        if (!s_instance)
+        {
+            Logger::init();
+            s_instance = this;
+            LOG_INFO("Application instantiated.");
+        }
+        else
+        {
+            LOG_WARN("Application already exists!");
+        }
+    }
+
+
+    EventQueue &Application::getEventQueue()
+    {
+        return s_eventQueue;
+    }
+
     void Application::pushLayer(Layer *layer)
     {
         m_layers.emplace_back(layer);
@@ -37,18 +60,23 @@ namespace HYT
 
     void Application::run()
     {
-        while(m_shouldRun)
+        if (!m_initialized)
+        {
+            LOG_ERROR("Application not initialized");
+            return;
+        }
+        while (m_shouldRun)
         {
             auto now = Timer::now();
             float dt = Timer::ellapsedSeconds(m_LastFrameTime, now);
             m_LastFrameTime = now;
 
-            for(auto layer : m_layers)
+            for (auto layer : m_layers)
             {
                 layer->onUpdate(dt);
             }
 
-            for(auto overlay : m_overlays)
+            for (auto overlay : m_overlays)
             {
                 overlay->onUpdate(dt);
             }

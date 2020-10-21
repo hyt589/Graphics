@@ -52,6 +52,8 @@ namespace HYT
             {
                 overlay->onUpdate(dt);
             }
+
+            m_window->onUpdate();
         }
     }
 } // namespace HYT

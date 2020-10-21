@@ -6,14 +6,17 @@ include(CTest)
 enable_testing()
 
 file(GLOB SOURCE_FILES
-    src/App/EntryPoint.cpp
-    src/Core/Event.cpp
+    dependencies/glad/src/glad.c
+    src/**/*.cpp
 )
 
 include_directories(
     src/App
     src/Core
+    dependencies/glad/include
 )
+
+set_source_files_properties(dependencies/glad/src/glad.c PROPERTIES SKIP_PRECOMPILE_HEADERS on)
 
 add_executable(Application ${SOURCE_FILES})
 
@@ -22,6 +25,7 @@ target_precompile_headers(
     PUBLIC
     src/Core/global.hpp
 )
+
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

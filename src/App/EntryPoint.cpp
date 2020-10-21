@@ -1,9 +1,7 @@
-#include "global.hpp"
-#include <Event.hpp>
-#include "Log.hpp"
+#include "Core.hpp"
 
-int main(int, char**) {
+int main(int, char **)
+{
     HYT::Logger::init();
     LOG_INFO("Hello world");
-    
 }

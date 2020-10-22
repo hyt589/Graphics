@@ -22,9 +22,13 @@ namespace HYT::GL
         ~Shader();
 
         GLuint ID();
+        ShaderType getType();
+        bool isCompiled();
 
     protected:
         GLuint m_id;
+        ShaderType m_type;
+        bool m_isCompiled = false;
     };
 
     class ShaderProgram
@@ -34,8 +38,10 @@ namespace HYT::GL
         ~ShaderProgram();
 
         GLuint ID();
+        bool isLinkSuccess();
 
     protected:
         GLuint m_id;
+        bool m_linkSuccess;
     };
 } // namespace HYT::GL

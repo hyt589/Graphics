@@ -3,32 +3,48 @@
 
 namespace HYT
 {
-    EventQueue Application::s_eventQueue;
-    Application * Application::s_instance;
+    // EventQueue Application::s_eventQueue;
+    Application *Application::s_instance;
 
-    Application::Application()
+    Application::Application(WindowProps &props)
     {
         if (!s_instance)
         {
             Logger::init();
             s_instance = this;
-            LOG_INFO("Application instantiated.");
+
+            m_window = std::unique_ptr<Window>(Window::Create(props));
+            m_initialized = true;
+
+            m_eventQueue = EventQueue();
+            m_LastFrameTime = Timer::now();
+
+            LOG_INFO("[CORE] Application instantiated.");
         }
         else
         {
-            LOG_WARN("Application already exists!");
+            LOG_WARN("[CORE] Application already exists!");
         }
     }
 
+    Application *Application::getInstance(const std::string &name, uint32_t width, uint32_t height)
+    {
+        if (!s_instance)
+        {
+            WindowProps props(name, width, height);
+            Application app(props);
+        }
+        return s_instance;
+    }
 
     EventQueue &Application::getEventQueue()
     {
-        return s_eventQueue;
+        return m_eventQueue;
     }
 
     void Application::pushLayer(Layer *layer)
     {
-        m_layers.emplace_back(layer);
+        m_layers.push_back(layer);
         layer->init();
     }
 
@@ -44,7 +60,7 @@ namespace HYT
 
     void Application::pushOverlay(Layer *layer)
     {
-        m_overlays.emplace_back(layer);
+        m_overlays.push_back(layer);
         layer->init();
     }
 
@@ -60,9 +76,9 @@ namespace HYT
 
     void Application::run()
     {
-        if (!m_initialized)
+        if (m_initialized == false)
         {
-            LOG_ERROR("Application not initialized");
+            LOG_ERROR("[CORE] Application cannot run before initialization");
             return;
         }
         while (m_shouldRun)

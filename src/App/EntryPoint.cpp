@@ -1,7 +1,9 @@
 #include "Core.hpp"
 
+using namespace HYT;
+
 int main(int, char **)
 {
-    HYT::Logger::init();
-    LOG_INFO("Hello world");
+    auto app = Application::getInstance();
+    app->run();
 }

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-project(Application VERSION 0.1.0)
+project(Engine VERSION 0.1.0)
 
 include(CTest)
 enable_testing()
@@ -16,9 +16,14 @@ add_subdirectory(dependencies/glfw)
 
 set(LIB spdlog::spdlog glfw)
 
-file(GLOB SOURCE_FILES
+file(GLOB CORE_SOURCE_FILES
     dependencies/glad/src/glad.c
-    src/**/*.cpp
+    src/App/*.cpp
+    src/Core/*.cpp
+)
+
+file(GLOB OGL_SRC
+    src/OpenGL/*.cpp
 )
 
 include_directories(
@@ -27,18 +32,19 @@ include_directories(
     src/OpenGL
     dependencies/glad/include
     dependencies/glm/glm
+    dependencies/spdlog/include
 )
 
 set_source_files_properties(dependencies/glad/src/glad.c PROPERTIES SKIP_PRECOMPILE_HEADERS on)
 
-add_executable(Application ${SOURCE_FILES})
+add_executable(Application_OpenGL ${CORE_SOURCE_FILES} ${OGL_SRC})
 
-target_precompile_headers(
-    Application
-    PUBLIC
-    src/Core/global.hpp
-)
-target_link_libraries(Application PRIVATE ${LIB})
+# target_precompile_headers(
+#     Application
+#     PUBLIC
+#     src/Core/global.hpp
+# )
+target_link_libraries(Application_OpenGL PRIVATE ${LIB})
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

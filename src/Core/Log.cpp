@@ -6,7 +6,7 @@ namespace HYT
 
     void Logger::init()
     {
-        spdlog::set_pattern("%^[%T] %n: %v%$");
+        spdlog::set_pattern("%^[%c] [%n] [%l]: %v%$");
 		s_logger = spdlog::stdout_color_mt("HYT");
 		s_logger->set_level(spdlog::level::trace);
     }

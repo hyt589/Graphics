@@ -22,13 +22,13 @@ namespace HYT
     class Window
     {
     public:
-        Window();
-		virtual ~Window();
+        Window(){};
+		virtual ~Window(){};
         virtual void onUpdate() = 0;
-        virtual void getSize(int & w, int & h);
+        virtual void getSize(int & w, int & h) = 0;
         virtual void* GetNativeWindow() const = 0;
+		static Window* Create(const WindowProps& props = WindowProps());
     protected:
 		std::string m_title;
-		uint32_t m_width, m_height;
     };
 } // namespace HYT

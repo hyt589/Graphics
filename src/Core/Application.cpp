@@ -6,33 +6,18 @@ namespace HYT
     // EventQueue Application::s_eventQueue;
     Application *Application::s_instance;
 
-    Application::Application(WindowProps &props)
-    {
-        if (!s_instance)
-        {
-            Logger::init();
-            s_instance = this;
-
-            m_window = std::unique_ptr<Window>(Window::Create(props));
-            m_initialized = true;
-
-            m_eventQueue = EventQueue();
-            m_LastFrameTime = Timer::now();
-
-            LOG_INFO("[CORE] Application instantiated.");
-        }
-        else
-        {
-            LOG_WARN("[CORE] Application already exists!");
-        }
-    }
+    
 
     Application *Application::getInstance(const std::string &name, uint32_t width, uint32_t height)
     {
         if (!s_instance)
         {
             WindowProps props(name, width, height);
-            Application app(props);
+            s_instance = new Application();
+            s_instance->m_initialized = true;
+            Logger::init();
+            s_instance->m_window = std::unique_ptr<Window>(Window::Create(props));
+            LOG_INFO("[CORE] Application instantiated.");
         }
         return s_instance;
     }
@@ -44,6 +29,7 @@ namespace HYT
 
     void Application::pushLayer(Layer *layer)
     {
+        LOG_DEBUG("{}", m_initialized);
         m_layers.push_back(layer);
         layer->init();
     }
@@ -78,6 +64,7 @@ namespace HYT
     {
         if (m_initialized == false)
         {
+            // LOG_DEBUG("m_initialized: {}", m_initialized);
             LOG_ERROR("[CORE] Application cannot run before initialization");
             return;
         }

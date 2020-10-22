@@ -8,10 +8,10 @@ namespace HYT
     class Layer
     {
     public:
-        virtual void init() = 0;
-        virtual void onUpdate(float seconds) = 0;
-        virtual void terminate() = 0;
-        virtual void onEvent(Event &e) = 0;
+        virtual void init() {};
+        virtual void onUpdate(float seconds) {};
+        virtual void terminate() {};
+        virtual void onEvent(Event &e) {};
 
     protected:
     };

@@ -14,6 +14,6 @@ namespace HYT::Timer
 
     double ellapsedSeconds(std::chrono::time_point<std::chrono::steady_clock> & start, std::chrono::time_point<std::chrono::steady_clock> & end)
     {
-        return std::chrono::duration_cast<std::chrono::seconds>(end - start).count();
+        return ellapsedMilliseconds(start, end) / 1000.0;
     }
 } // namespace HYT::Timer

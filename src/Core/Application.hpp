@@ -21,7 +21,6 @@ namespace HYT
         static Application * getInstance(const std::string& name = "OpenGL Sandbox", uint32_t width = 1280, uint32_t height = 720);
 
     protected:
-        Application(WindowProps& props);
         Application() = default;
         bool m_initialized = false;
         bool m_shouldRun = true;

@@ -18,18 +18,19 @@ set(LIB spdlog::spdlog glfw)
 
 file(GLOB CORE_SOURCE_FILES
     dependencies/glad/src/glad.c
-    src/App/*.cpp
-    src/Core/*.cpp
+    src/Core/**.cpp
 )
 
 file(GLOB OGL_SRC
     src/OpenGL/*.cpp
+    src/Apps/AppOpenGL/*.cpp
 )
 
 include_directories(
     src/App
     src/Core
     src/OpenGL
+    src/Apps/AppOpenGL
     dependencies/glad/include
     dependencies/glm/glm
     dependencies/spdlog/include

@@ -1,6 +1,7 @@
 #include "Application.hpp"
 #include "Timer.hpp"
 
+
 namespace HYT
 {
     // EventQueue Application::s_eventQueue;
@@ -68,11 +69,14 @@ namespace HYT
             LOG_ERROR("[CORE] Application cannot run before initialization");
             return;
         }
+        // LOG_INFO("[CORE] Application starting");
         while (m_shouldRun)
         {
             auto now = Timer::now();
             float dt = Timer::ellapsedSeconds(m_LastFrameTime, now);
             m_LastFrameTime = now;
+
+            LOG_INFO("[CORE] fps = {}", 1.f/dt);
 
             for (auto layer : m_layers)
             {

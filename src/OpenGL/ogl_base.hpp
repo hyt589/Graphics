@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Core.hpp"
 #include <glad/glad.h>
 #include <glm.hpp>

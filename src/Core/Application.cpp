@@ -76,8 +76,6 @@ namespace HYT
             float dt = Timer::ellapsedSeconds(m_LastFrameTime, now);
             m_LastFrameTime = now;
 
-            LOG_INFO("[CORE] fps = {}", 1.f/dt);
-
             for (auto layer : m_layers)
             {
                 layer->onUpdate(dt);

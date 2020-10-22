@@ -13,6 +13,9 @@ namespace HYT::OpenGL
     GlfwWindow::GlfwWindow(const WindowProps &props)
     {
         glfwInit();
+        //MacOS only support OpenGL up to 4.1
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
         m_nativeWindow = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), NULL, NULL);
 
         glfwMakeContextCurrent(m_nativeWindow);

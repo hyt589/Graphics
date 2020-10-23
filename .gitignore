@@ -5,3 +5,4 @@
 !.gitignore
 !dependencies
 !dependencies/**
+!README.md

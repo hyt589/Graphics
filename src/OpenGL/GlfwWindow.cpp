@@ -34,7 +34,12 @@ namespace HYT::OpenGL
 
     void GlfwWindow::onUpdate()
     {
-
+        glfwSwapBuffers(m_nativeWindow);
+        glfwPollEvents();
+        if(glfwWindowShouldClose(m_nativeWindow))
+        {
+            m_eventDispatcher.post(Event(EventType::WindowCloseEvent), Application::getInstance()->getEventQueue());
+        }
     }
 
     void GlfwWindow::getSize(int & w, int & h)

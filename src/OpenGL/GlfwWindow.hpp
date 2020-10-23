@@ -9,7 +9,7 @@ namespace HYT::OpenGL
         GlfwWindow(const WindowProps &props);
         ~GlfwWindow() override
         {
-            
+
         };
         virtual void onUpdate() override;
         virtual void getSize(int &w, int &h) override;
@@ -17,5 +17,6 @@ namespace HYT::OpenGL
 
     private:
         GLFWwindow * m_nativeWindow;
+        EventDispatcher m_eventDispatcher;
     };
 } // namespace HYT::OpenGL

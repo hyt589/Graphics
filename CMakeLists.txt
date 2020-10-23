@@ -34,6 +34,7 @@ include_directories(
     dependencies/glad/include
     dependencies/glm/glm
     dependencies/spdlog/include
+    dependencies/magic_enum/include
 )
 
 set_source_files_properties(dependencies/glad/src/glad.c PROPERTIES SKIP_PRECOMPILE_HEADERS on)

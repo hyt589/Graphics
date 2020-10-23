@@ -7,3 +7,6 @@
 [submodule "dependencies/glm"]
 	path = dependencies/glm
 	url = https://gitclone.com/github.com/g-truc/glm
+[submodule "dependencies/magic_enum"]
+	path = dependencies/magic_enum
+	url = https://gitclone.com/github.com/Neargye/magic_enum.git

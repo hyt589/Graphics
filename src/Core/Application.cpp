@@ -1,13 +1,10 @@
 #include "Application.hpp"
 #include "Timer.hpp"
 
-
 namespace HYT
 {
     // EventQueue Application::s_eventQueue;
     Application *Application::s_instance;
-
-    
 
     Application *Application::getInstance(const std::string &name, uint32_t width, uint32_t height)
     {
@@ -61,6 +58,57 @@ namespace HYT
         }
     }
 
+    void Application::shouldRun(bool should)
+    {
+        m_shouldRun = should;
+    }
+
+    void Application::subscribe(EventType type, std::function<bool(Event &)> callback)
+    {
+        m_dispatcher.subscribe(type, callback);
+    }
+
+    void Application::handleEvents()
+    {
+        while (!m_eventQueue.isEmpty())
+        {
+            auto &event = m_eventQueue.front();
+
+            for (int i = m_overlays.size() - 1; i >= 0; i--)
+            {
+                m_overlays[i]->onEvent(event);
+                if (event.isHandled)
+                {
+                    break;
+                }
+            }
+
+            if (!event.isHandled)
+            {
+                for (int i = m_layers.size() - 1; i >= 0; i--)
+                {
+                    m_overlays[i]->onEvent(event);
+                    if (event.isHandled)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (!event.isHandled)
+            {
+                m_dispatcher.handle(event);
+            }
+
+            if (!event.isHandled)
+            {
+                LOG_CRITICAL("[CORE] Event not properly handled: {}", event.to_string());
+            }
+
+            m_eventQueue.pop();
+        }
+    }
+
     void Application::run()
     {
         if (m_initialized == false)
@@ -72,6 +120,7 @@ namespace HYT
         // LOG_INFO("[CORE] Application starting");
         while (m_shouldRun)
         {
+            handleEvents();
             auto now = Timer::now();
             float dt = Timer::ellapsedSeconds(m_LastFrameTime, now);
             m_LastFrameTime = now;
@@ -88,5 +137,7 @@ namespace HYT
 
             m_window->onUpdate();
         }
+
+        LOG_INFO("[CORE] Application terminating");
     }
 } // namespace HYT

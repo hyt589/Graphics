@@ -1,13 +1,14 @@
 #pragma once
 
 #include "global.hpp"
+#include <magic_enum.hpp>
 
 namespace HYT
 {
     enum class EventType
     {
         None = 0,
-        DemoEvent
+        WindowCloseEvent
     };
 
     class Event
@@ -19,6 +20,7 @@ namespace HYT
         {
             return m_eventType;
         };
+        std::string to_string();
 
     private:
         const EventType m_eventType;
@@ -39,6 +41,8 @@ namespace HYT
 
         //Check if the queue is empty
         bool isEmpty() const;
+
+        int size() const;
     protected:
         std::queue<Event> m_events;
     };

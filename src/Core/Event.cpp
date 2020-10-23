@@ -4,6 +4,11 @@ namespace HYT
 {
     Event::Event(EventType type) : m_eventType(type){}
 
+    std::string Event::to_string()
+    {
+        return std::string(magic_enum::enum_name(m_eventType));
+    }
+
     void EventQueue::push(Event e)
     {
         m_events.push(e);
@@ -22,6 +27,11 @@ namespace HYT
     bool EventQueue::isEmpty() const
     {
         return m_events.empty();
+    }
+
+    int EventQueue::size() const
+    {
+        return m_events.size();
     }
 
     void EventDispatcher::subscribe(EventType type, EventFn callback)

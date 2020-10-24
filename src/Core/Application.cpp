@@ -101,7 +101,7 @@ namespace HYT
 
             if (!event.isHandled)
             {
-                LOG_CRITICAL("[CORE] Event not properly handled: {}", event.to_string());
+                LOG_ERROR("[CORE] Event not properly handled: {}", event.to_string());
             }
 
             m_eventQueue.pop();

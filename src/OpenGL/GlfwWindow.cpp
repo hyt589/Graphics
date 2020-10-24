@@ -22,7 +22,7 @@ namespace HYT::OpenGL
         GL(int gl_load_status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress));
         if(!gl_load_status)
         {
-            LOG_ERROR("[OpenGL] Glad initialization failed");
+            LOG_CRITICAL("[OpenGL] Glad initialization failed");
             std::raise(SIGINT);
         }
 

@@ -14,13 +14,14 @@ namespace HYT
     class Event
     {
     public:
-        Event(EventType et);
+        Event(EventType et, std::any data = NULL);
         bool isHandled = false;
         inline EventType getEventType() const
         {
             return m_eventType;
         };
         std::string to_string();
+        std::any eventData;
 
     private:
         const EventType m_eventType;

@@ -2,8 +2,9 @@
 
 namespace HYT::OpenGL
 {
-    class OpenGLSandboxLayer : public Layer
+    class SandboxLayer : public Layer
     {
+
         virtual void init() override;
         virtual void onUpdate(float dt) override;
         virtual void terminate() override;

@@ -2,7 +2,10 @@
 
 namespace HYT
 {
-    Event::Event(EventType type) : m_eventType(type){}
+    Event::Event(EventType type, std::any data)
+        : m_eventType(type), eventData(data)
+    {
+    }
 
     std::string Event::to_string()
     {
@@ -19,7 +22,7 @@ namespace HYT
         m_events.pop();
     }
 
-    Event & EventQueue::front()
+    Event &EventQueue::front()
     {
         return m_events.front();
     }
@@ -39,12 +42,12 @@ namespace HYT
         m_callbacks[type] = callback;
     }
 
-    void EventDispatcher::post(Event event, EventQueue & queue)
+    void EventDispatcher::post(Event event, EventQueue &queue)
     {
         queue.push(event);
     }
 
-    void EventDispatcher::handle(Event & e)
+    void EventDispatcher::handle(Event &e)
     {
         auto type = e.getEventType();
         if (m_callbacks.find(type) == m_callbacks.end())
@@ -55,5 +58,4 @@ namespace HYT
         e.isHandled = callback(e);
     }
 
-
-} // namespace HYT::Core
+} // namespace HYT

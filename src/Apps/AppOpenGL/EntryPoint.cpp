@@ -10,6 +10,6 @@ int main(int, char **)
         app->shouldRun(false);
         return true;
     });
-    app->pushLayer(new OpenGL::OpenGLSandboxLayer);
+    app->pushLayer(new OpenGL::SandboxLayer);
     app->run();
 }

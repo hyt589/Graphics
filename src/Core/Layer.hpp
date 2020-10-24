@@ -12,7 +12,12 @@ namespace HYT
         virtual void onUpdate(float seconds) {};
         virtual void terminate() {};
         virtual void onEvent(Event &e) {};
+        inline void subscribe(EventType type, std::function<bool(Event&)> callback)
+        {
+            m_eventDispatcher.subscribe(type, callback);
+        };
 
     protected:
+        EventDispatcher m_eventDispatcher;
     };
 } // namespace HYT

@@ -1,4 +1,5 @@
 #include "Core.hpp"
+#include "SandboxLayer.hpp"
 
 using namespace HYT;
 
@@ -9,5 +10,6 @@ int main(int, char **)
         app->shouldRun(false);
         return true;
     });
+    app->pushLayer(new OpenGL::OpenGLSandboxLayer);
     app->run();
 }

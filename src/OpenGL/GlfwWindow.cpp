@@ -26,20 +26,28 @@ namespace HYT::OpenGL
             std::raise(SIGINT);
         }
 
+        glfwSetWindowUserPointer(m_nativeWindow, this);
+
+        glfwSetWindowCloseCallback(m_nativeWindow, [](GLFWwindow * window){
+            auto * ptr = static_cast<GlfwWindow*>(glfwGetWindowUserPointer(window));
+            ptr->post(Event(EventType::WindowCloseEvent));
+        });
+
         LOG_INFO("OpenGL Info:");
 		LOG_INFO("  Vendor: {0}", glGetString(GL_VENDOR));
 		LOG_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
 		LOG_INFO("  Version: {0}", glGetString(GL_VERSION));
     }
 
+    void GlfwWindow::post(Event e)
+    {
+        m_eventDispatcher.post(e, APP_EVENT_QUEUE);
+    }
+
     void GlfwWindow::onUpdate()
     {
         glfwSwapBuffers(m_nativeWindow);
         glfwPollEvents();
-        if(glfwWindowShouldClose(m_nativeWindow))
-        {
-            m_eventDispatcher.post(Event(EventType::WindowCloseEvent), Application::getInstance()->getEventQueue());
-        }
     }
 
     void GlfwWindow::getSize(int & w, int & h)

@@ -37,3 +37,6 @@ namespace HYT
         static Application * s_instance;
     };
 } // namespace HYT
+
+#define APP_EVENT_QUEUE ::HYT::Application::getInstance()->getEventQueue()
+#define APP_INSTANCE ::HYT::Application::getInstance()

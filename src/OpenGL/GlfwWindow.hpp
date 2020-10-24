@@ -14,9 +14,9 @@ namespace HYT::OpenGL
         virtual void onUpdate() override;
         virtual void getSize(int &w, int &h) override;
         virtual void *GetNativeWindow() const override;
+        void post(Event e);
 
     private:
         GLFWwindow * m_nativeWindow;
-        EventDispatcher m_eventDispatcher;
     };
 } // namespace HYT::OpenGL

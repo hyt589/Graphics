@@ -30,5 +30,6 @@ namespace HYT
 		static Window* Create(const WindowProps& props = WindowProps());
     protected:
 		std::string m_title;
+        EventDispatcher m_eventDispatcher;
     };
 } // namespace HYT

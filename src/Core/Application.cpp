@@ -27,7 +27,6 @@ namespace HYT
 
     void Application::pushLayer(Layer *layer)
     {
-        LOG_DEBUG("{}", m_initialized);
         m_layers.push_back(layer);
         layer->init();
     }
@@ -87,7 +86,7 @@ namespace HYT
             {
                 for (int i = m_layers.size() - 1; i >= 0; i--)
                 {
-                    m_overlays[i]->onEvent(event);
+                    m_layers[i]->onEvent(event);
                     if (event.isHandled)
                     {
                         break;
@@ -113,7 +112,6 @@ namespace HYT
     {
         if (m_initialized == false)
         {
-            // LOG_DEBUG("m_initialized: {}", m_initialized);
             LOG_ERROR("[CORE] Application cannot run before initialization");
             return;
         }

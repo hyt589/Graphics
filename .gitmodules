@@ -10,3 +10,6 @@
 [submodule "dependencies/magic_enum"]
 	path = dependencies/magic_enum
 	url = https://gitclone.com/github.com/Neargye/magic_enum.git
+[submodule "dependencies/imgui"]
+	path = dependencies/imgui
+	url = https://gitclone.com/github.com/ocornut/imgui.git

@@ -3,8 +3,13 @@
 namespace HYT
 {
     Event::Event(EventType type, std::any data)
-        : m_eventType(type), eventData(data)
+        : m_eventType(type), m_eventData(data)
     {
+    }
+
+    std::any Event::getData()
+    {
+        return m_eventData;
     }
 
     std::string Event::to_string()

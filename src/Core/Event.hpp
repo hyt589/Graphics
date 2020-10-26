@@ -8,7 +8,11 @@ namespace HYT
     enum class EventType
     {
         None = 0,
-        WindowCloseEvent
+        WindowCloseEvent,
+        KeyPressEvent, KeyReleaseEvent, KeyRepeatEvent,
+        MouseButtonPressEvent, MouseButtonReleaseEvent, MouseButtonRepeatEvent,
+        CursorPosEvent,
+        ScrollEvent
     };
 
     class Event
@@ -21,10 +25,11 @@ namespace HYT
             return m_eventType;
         };
         std::string to_string();
-        std::any eventData;
+        std::any getData();
 
     private:
         const EventType m_eventType;
+        std::any m_eventData;
     };
 
     //Event is pushed into a queue before they are handled in chronological order

@@ -1,3 +1,14 @@
+/**
+ * @file global.hpp
+ * @author Yutong Huang (yutong.huang@outlook.com)
+ * @brief Include all necessary headers from STL
+ * @version 0.1
+ * @date 2020-10-26
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #pragma once
 
 #include <iostream>

@@ -29,27 +29,27 @@ namespace HYT::OpenGL
         glfwSetWindowUserPointer(m_nativeWindow, this);
 
         glfwSetWindowCloseCallback(m_nativeWindow, [](GLFWwindow *window) {
-            auto *ptr = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
-            ptr->post(Event(EventType::WindowCloseEvent));
+            auto *windowPtr = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
+            windowPtr->post(Event(EventType::WindowCloseEvent));
         });
 
         glfwSetKeyCallback(m_nativeWindow, [](GLFWwindow *window, int key, int scancode, int action, int mods) {
-            auto win = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
+            auto windowPtr = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
             switch (action)
             {
             case GLFW_PRESS:
             {
-                win->post(Event(EventType::KeyPressEvent, key));
+                windowPtr->post(Event(EventType::KeyPressEvent, key));
                 break;
             }
             case GLFW_RELEASE:
             {
-                win->post(Event(EventType::KeyReleaseEvent, key));
+                windowPtr->post(Event(EventType::KeyReleaseEvent, key));
                 break;
             }
             case GLFW_REPEAT:
             {
-                win->post(Event(EventType::KeyRepeatEvent, key));
+                windowPtr->post(Event(EventType::KeyRepeatEvent, key));
                 break;
             }
             default:
@@ -58,22 +58,22 @@ namespace HYT::OpenGL
         });
 
         glfwSetMouseButtonCallback(m_nativeWindow, [](GLFWwindow *window, int button, int action, int mods) {
-            auto win = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
+            auto windowPtr = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
             switch (action)
             {
             case GLFW_PRESS:
             {
-                win->post(Event(EventType::MouseButtonPressEvent, button));
+                windowPtr->post(Event(EventType::MouseButtonPressEvent, button));
                 break;
             }
             case GLFW_RELEASE:
             {
-                win->post(Event(EventType::MouseButtonReleaseEvent, button));
+                windowPtr->post(Event(EventType::MouseButtonReleaseEvent, button));
                 break;
             }
             case GLFW_REPEAT:
             {
-                win->post(Event(EventType::MouseButtonRepeatEvent, button));
+                windowPtr->post(Event(EventType::MouseButtonRepeatEvent, button));
                 break;
             }
             default:
@@ -83,15 +83,15 @@ namespace HYT::OpenGL
 
         glfwSetCursorPosCallback(m_nativeWindow, [](GLFWwindow* window, double xpos, double ypos)
         {
-            auto win = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
+            auto windowPtr = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
             glm::vec2 xy(xpos, ypos);
-            win->post(Event(EventType::CursorPosEvent, xy));
+            windowPtr->post(Event(EventType::CursorPosEvent, xy));
         });
 
         glfwSetScrollCallback(m_nativeWindow, [](GLFWwindow* window, double xoffset, double yoffset){
-            auto win = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
+            auto windowPtr = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
             glm::vec2 xy(xoffset, yoffset);
-            win->post(Event(EventType::ScrollEvent, xy));
+            windowPtr->post(Event(EventType::ScrollEvent, xy));
         });
 
         LOG_INFO("OpenGL Info:");

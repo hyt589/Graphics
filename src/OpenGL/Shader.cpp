@@ -57,7 +57,7 @@ namespace HYT::OpenGL
         return m_isCompiled;
     }
 
-    ShaderProgram::ShaderProgram(Shader *shader, ...)
+    ShaderProgram::ShaderProgram(Shader *shader ...)
     {
         GL(m_id = glCreateProgram());
         va_list shaders;

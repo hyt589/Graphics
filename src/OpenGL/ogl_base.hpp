@@ -7,6 +7,14 @@
 #include <gtc/type_ptr.hpp>
 #include <gtx/string_cast.hpp>
 
+/**
+ * @brief Check if an error occurred within OpenGL
+ * 
+ * @param file the file name where the error is located
+ * @param line the line number where the error is located
+ * @return true if an error has been detected
+ * @return false if no error has been detected
+ */
 inline bool glCheckError_(const char * file, int line)
 {
     bool err = false;
@@ -29,7 +37,16 @@ inline bool glCheckError_(const char * file, int line)
     }
     return err;
 }
+
+/**
+ * @brief Check if an OpenGL error has occurred
+ * 
+ */
 #define glCheckError if(glCheckError_(__FILE__, __LINE__)) std::raise(SIGINT)
 
+/**
+ * @brief Debug wrapper around OpenGL functions
+ * 
+ */
 #define GL(glFunctionCall) glFunctionCall; glCheckError
 

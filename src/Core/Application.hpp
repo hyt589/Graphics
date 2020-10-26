@@ -7,22 +7,86 @@
 
 namespace HYT
 {
+    /**
+     * @brief Application is a singleton class that contains a single instance of this application
+     * 
+     */
     class Application
     {
     public:
-        virtual ~Application() {};
+        virtual ~Application(){};
+
+        /**
+         * @brief Push a layer pointer to the layer stack.
+         * 
+         * @param layer pointer to the layer to push.
+         */
         void pushLayer(Layer *layer);
+
+        /**
+         * @brief Find and pop a layer pointer from the stack.
+         * 
+         * @param layer layer pointer to pop.
+         */
         void popLayer(Layer *layer);
+
+        /**
+         * @brief Push an overlay onto the layer stack.
+         * 
+         * @param layer pointer to the overlay layer.
+         */
         void pushOverlay(Layer *layer);
+
+        /**
+         * @brief Find and pop an overlay from the stack.
+         * 
+         * @param layer overlay layer pointer to pop.
+         */
         void popOverlay(Layer *layer);
-        void subscribe(EventType, std::function<bool(Event &)>);
-        void shouldRun(bool should);
+
+        /**
+         * @brief Subscribe to a type of event with a provided callback.
+         * 
+         * @param type the type of event to subscribe to.
+         * @param callback the function to be called when the event is handled.
+         */
+        void subscribe(EventType type, std::function<bool(Event &)> callback);
+
+        /**
+         * @brief Set whether the application should keep running.
+         * 
+         * @param should whether the application should run.
+         */
+        void setShouldRun(bool should);
+
+        /**
+         * @brief start the application main cycle
+         * 
+         */
         void run();
 
-        EventQueue & getEventQueue();
-        static Application * getInstance(const std::string& name = "OpenGL Sandbox", uint32_t width = 1280, uint32_t height = 720);
+        /**
+         * @brief Get the Event Queue reference
+         * 
+         * @returns the reference to the application event queue 
+         */
+        EventQueue &getEventQueue();
+
+        /**
+         * @brief Get the application instance
+         * 
+         * @param name name of the application
+         * @param width width of application window
+         * @param height height of application window
+         * @return Application* pointer to the application instance
+         */
+        static Application *getInstance(const std::string &name = "OpenGL Sandbox", uint32_t width = 1280, uint32_t height = 720);
 
     protected:
+        /**
+         * @brief handle events in the event queue
+         * 
+         */
         void handleEvents();
         Application() = default;
 
@@ -34,7 +98,7 @@ namespace HYT
         std::unique_ptr<Window> m_window;
         EventQueue m_eventQueue;
         EventDispatcher m_dispatcher;
-        static Application * s_instance;
+        static Application *s_instance;
     };
 } // namespace HYT
 

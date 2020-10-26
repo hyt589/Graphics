@@ -8,10 +8,24 @@
 
 namespace HYT
 {
+    /**
+     * @brief Using spdlog as application logger
+     * 
+     */
     class Logger
     {
     public:
+        /**
+         * @brief Initialize spdlog
+         * 
+         */
         static void init();
+
+        /**
+         * @brief get the pointer of the logger
+         * 
+         * @return std::shared_ptr<spdlog::logger>& 
+         */
         inline static std::shared_ptr<spdlog::logger> &get() { return s_logger; };
 
     protected:

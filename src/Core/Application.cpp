@@ -57,7 +57,7 @@ namespace HYT
         }
     }
 
-    void Application::shouldRun(bool should)
+    void Application::setShouldRun(bool should)
     {
         m_shouldRun = should;
     }
@@ -101,7 +101,7 @@ namespace HYT
 
             if (!event.isHandled)
             {
-                LOG_ERROR("[CORE] Event not properly handled: {}", event.to_string());
+                LOG_WARN("[CORE] Event not properly handled: {}", event.to_string());
             }
 
             m_eventQueue.pop();
@@ -112,7 +112,7 @@ namespace HYT
     {
         if (m_initialized == false)
         {
-            LOG_ERROR("[CORE] Application cannot run before initialization");
+            LOG_CRITICAL("[CORE] Application cannot run before initialization");
             return;
         }
         // LOG_INFO("[CORE] Application starting");

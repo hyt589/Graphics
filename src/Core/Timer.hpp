@@ -2,6 +2,10 @@
 
 #include "global.hpp"
 
+/**
+ * @brief Functions related to time
+ * 
+ */
 namespace HYT::Timer
 {
     std::chrono::time_point<std::chrono::steady_clock> now();

@@ -1,8 +1,16 @@
 #include "ogl_base.hpp"
 #include <GLFW/glfw3.h>
 
+/**
+ * @brief OpenGL specific code
+ * 
+ */
 namespace HYT::OpenGL
 {
+    /**
+     * @brief An application window implementation based on GLFW
+     * 
+     */
     class GlfwWindow : public Window
     {
     public:

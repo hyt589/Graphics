@@ -14,14 +14,42 @@ namespace HYT::OpenGL
         Compute = GL_COMPUTE_SHADER
     };
 
+    /**
+     * @brief OpenGL shader abstraction
+     * 
+     */
     class Shader
     {
     public:
-        Shader(std::string path, ShaderType);
+        /**
+         * @brief Construct a new Shader object
+         * 
+         * @param path path to the shader file
+         * @param type type of the shader
+         */
+        Shader(std::string path, ShaderType type);
         ~Shader();
 
+        /**
+         * @brief Get the ID of the shader
+         * 
+         * @return GLuint id
+         */
         GLuint ID();
+
+        /**
+         * @brief Get the type if the shader
+         * 
+         * @return ShaderType 
+         */
         ShaderType getType();
+
+        /**
+         * @brief check if the shader is compiled
+         * 
+         * @return true 
+         * @return false 
+         */
         bool isCompiled();
 
     protected:
@@ -30,10 +58,19 @@ namespace HYT::OpenGL
         bool m_isCompiled = false;
     };
 
+    /**
+     * @brief OpenGL program abstraction
+     * 
+     */
     class ShaderProgram
     {
     public:
-        ShaderProgram(Shader *shader, ...);
+        /**
+         * @brief Construct a new Shader Program object
+         * 
+         * @param shader shaders to be linked
+         */
+        ShaderProgram(Shader *shader ...);
         ~ShaderProgram();
 
         GLuint ID();
@@ -42,8 +79,21 @@ namespace HYT::OpenGL
         void activate();
         void deactivate();
 
+        /**
+         * @brief Perform some tasks with the program being active
+         * 
+         * @param f the task to be performed
+         */
         void activateAndDo(std::function<void()> f);
 
+        /**
+         * @brief Set the Uniform
+         * 
+         * @tparam T type of the uniform variable
+         * @param name name of the uniform variable
+         * @param value value to assign to the uniform variable
+         * @param f glUniform function to call
+         */
         template <typename T>
         void setUniform(std::string name, T value, void (*f)(GLint, T))
         {
@@ -59,6 +109,15 @@ namespace HYT::OpenGL
             deactivate();
         };
 
+        /**
+         * @brief Set the Uniform
+         * 
+         * @tparam T type of the uniform variable
+         * @tparam P type of the value pointer
+         * @param name name of the uniform variable
+         * @param value value to assign to the uniform variable
+         * @param f glUniform function to call
+         */
         template <typename T, typename P>
         void setUniform(std::string name, T value, void (*f)(GLint, GLsizei, P))
         {
@@ -74,6 +133,15 @@ namespace HYT::OpenGL
             deactivate();
         };
 
+        /**
+         * @brief Set the Uniform
+         * 
+         * @tparam T type of the uniform variable
+         * @tparam P type of the value pointer
+         * @param name name of the uniform variable
+         * @param value value to assign to the uniform variable
+         * @param f glUniform function to call
+         */
         template <typename T, typename P>
         void setUniform(std::string name, T value, void (*f)(GLint, GLsizei, GLboolean, P))
         {

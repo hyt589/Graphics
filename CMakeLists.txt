@@ -19,22 +19,27 @@ set(LIB spdlog::spdlog glfw)
 file(GLOB CORE_SOURCE_FILES
     dependencies/glad/src/glad.c
     src/Core/**.cpp
+    src/ImGui/**.cpp
+    dependencies/imgui/*.cpp
 )
 
 file(GLOB OGL_SRC
     src/OpenGL/*.cpp
     src/Apps/AppOpenGL/*.cpp
+    dependencies/imgui/backends/imgui_impl_opengl3.cpp
 )
 
 include_directories(
     src/App
     src/Core
+    src/ImGui
     src/OpenGL
     src/Apps/AppOpenGL
     dependencies/glad/include
     dependencies/glm/glm
     dependencies/spdlog/include
     dependencies/magic_enum/include
+    dependencies/imgui
 )
 
 set_source_files_properties(dependencies/glad/src/glad.c PROPERTIES SKIP_PRECOMPILE_HEADERS on)

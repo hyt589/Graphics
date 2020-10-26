@@ -33,6 +33,12 @@ namespace HYT::OpenGL
             windowPtr->post(Event(EventType::WindowCloseEvent));
         });
 
+        glfwSetFramebufferSizeCallback(m_nativeWindow, [](GLFWwindow* window, int width, int height){
+            auto windowPtr = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
+            glm::vec2 size(width, height);
+            windowPtr->post(Event(EventType::WindowResizeEvent, size));
+        });
+
         glfwSetKeyCallback(m_nativeWindow, [](GLFWwindow *window, int key, int scancode, int action, int mods) {
             auto windowPtr = static_cast<GlfwWindow *>(glfwGetWindowUserPointer(window));
             switch (action)

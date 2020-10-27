@@ -123,3 +123,143 @@
 #define HYT_KEY_RIGHT_ALT          346
 #define HYT_KEY_RIGHT_SUPER        347
 #define HYT_KEY_MENU               348
+
+#define HYT_KEY_LAST               HYT_KEY_MENU
+
+/*! @} */
+
+/*! @defgroup mods Modifier key flags
+ *  @brief Modifier key flags.
+ *
+ *  See [key input](@ref input_key) for how these are used.
+ *
+ *  @ingroup input
+ *  @{ */
+
+/*! @brief If this bit is set one or more Shift keys were held down.
+ *
+ *  If this bit is set one or more Shift keys were held down.
+ */
+#define HYT_MOD_SHIFT           0x0001
+/*! @brief If this bit is set one or more Control keys were held down.
+ *
+ *  If this bit is set one or more Control keys were held down.
+ */
+#define HYT_MOD_CONTROL         0x0002
+/*! @brief If this bit is set one or more Alt keys were held down.
+ *
+ *  If this bit is set one or more Alt keys were held down.
+ */
+#define HYT_MOD_ALT             0x0004
+/*! @brief If this bit is set one or more Super keys were held down.
+ *
+ *  If this bit is set one or more Super keys were held down.
+ */
+#define HYT_MOD_SUPER           0x0008
+/*! @brief If this bit is set the Caps Lock key is enabled.
+ *
+ *  If this bit is set the Caps Lock key is enabled and the @ref
+ *  HYT_LOCK_KEY_MODS input mode is set.
+ */
+#define HYT_MOD_CAPS_LOCK       0x0010
+/*! @brief If this bit is set the Num Lock key is enabled.
+ *
+ *  If this bit is set the Num Lock key is enabled and the @ref
+ *  HYT_LOCK_KEY_MODS input mode is set.
+ */
+#define HYT_MOD_NUM_LOCK        0x0020
+
+/*! @} */
+
+/*! @defgroup buttons Mouse buttons
+ *  @brief Mouse button IDs.
+ *
+ *  See [mouse button input](@ref input_mouse_button) for how these are used.
+ *
+ *  @ingroup input
+ *  @{ */
+#define HYT_MOUSE_BUTTON_1         0
+#define HYT_MOUSE_BUTTON_2         1
+#define HYT_MOUSE_BUTTON_3         2
+#define HYT_MOUSE_BUTTON_4         3
+#define HYT_MOUSE_BUTTON_5         4
+#define HYT_MOUSE_BUTTON_6         5
+#define HYT_MOUSE_BUTTON_7         6
+#define HYT_MOUSE_BUTTON_8         7
+#define HYT_MOUSE_BUTTON_LAST      HYT_MOUSE_BUTTON_8
+#define HYT_MOUSE_BUTTON_LEFT      HYT_MOUSE_BUTTON_1
+#define HYT_MOUSE_BUTTON_RIGHT     HYT_MOUSE_BUTTON_2
+#define HYT_MOUSE_BUTTON_MIDDLE    HYT_MOUSE_BUTTON_3
+/*! @} */
+
+/*! @defgroup joysticks Joysticks
+ *  @brief Joystick IDs.
+ *
+ *  See [joystick input](@ref joystick) for how these are used.
+ *
+ *  @ingroup input
+ *  @{ */
+#define HYT_JOYSTICK_1             0
+#define HYT_JOYSTICK_2             1
+#define HYT_JOYSTICK_3             2
+#define HYT_JOYSTICK_4             3
+#define HYT_JOYSTICK_5             4
+#define HYT_JOYSTICK_6             5
+#define HYT_JOYSTICK_7             6
+#define HYT_JOYSTICK_8             7
+#define HYT_JOYSTICK_9             8
+#define HYT_JOYSTICK_10            9
+#define HYT_JOYSTICK_11            10
+#define HYT_JOYSTICK_12            11
+#define HYT_JOYSTICK_13            12
+#define HYT_JOYSTICK_14            13
+#define HYT_JOYSTICK_15            14
+#define HYT_JOYSTICK_16            15
+#define HYT_JOYSTICK_LAST          HYT_JOYSTICK_16
+/*! @} */
+
+/*! @defgroup gamepad_buttons Gamepad buttons
+ *  @brief Gamepad buttons.
+ *
+ *  See @ref gamepad for how these are used.
+ *
+ *  @ingroup input
+ *  @{ */
+#define HYT_GAMEPAD_BUTTON_A               0
+#define HYT_GAMEPAD_BUTTON_B               1
+#define HYT_GAMEPAD_BUTTON_X               2
+#define HYT_GAMEPAD_BUTTON_Y               3
+#define HYT_GAMEPAD_BUTTON_LEFT_BUMPER     4
+#define HYT_GAMEPAD_BUTTON_RIGHT_BUMPER    5
+#define HYT_GAMEPAD_BUTTON_BACK            6
+#define HYT_GAMEPAD_BUTTON_START           7
+#define HYT_GAMEPAD_BUTTON_GUIDE           8
+#define HYT_GAMEPAD_BUTTON_LEFT_THUMB      9
+#define HYT_GAMEPAD_BUTTON_RIGHT_THUMB     10
+#define HYT_GAMEPAD_BUTTON_DPAD_UP         11
+#define HYT_GAMEPAD_BUTTON_DPAD_RIGHT      12
+#define HYT_GAMEPAD_BUTTON_DPAD_DOWN       13
+#define HYT_GAMEPAD_BUTTON_DPAD_LEFT       14
+#define HYT_GAMEPAD_BUTTON_LAST            HYT_GAMEPAD_BUTTON_DPAD_LEFT
+
+#define HYT_GAMEPAD_BUTTON_CROSS       HYT_GAMEPAD_BUTTON_A
+#define HYT_GAMEPAD_BUTTON_CIRCLE      HYT_GAMEPAD_BUTTON_B
+#define HYT_GAMEPAD_BUTTON_SQUARE      HYT_GAMEPAD_BUTTON_X
+#define HYT_GAMEPAD_BUTTON_TRIANGLE    HYT_GAMEPAD_BUTTON_Y
+/*! @} */
+
+/*! @defgroup gamepad_axes Gamepad axes
+ *  @brief Gamepad axes.
+ *
+ *  See @ref gamepad for how these are used.
+ *
+ *  @ingroup input
+ *  @{ */
+#define HYT_GAMEPAD_AXIS_LEFT_X        0
+#define HYT_GAMEPAD_AXIS_LEFT_Y        1
+#define HYT_GAMEPAD_AXIS_RIGHT_X       2
+#define HYT_GAMEPAD_AXIS_RIGHT_Y       3
+#define HYT_GAMEPAD_AXIS_LEFT_TRIGGER  4
+#define HYT_GAMEPAD_AXIS_RIGHT_TRIGGER 5
+#define HYT_GAMEPAD_AXIS_LAST          HYT_GAMEPAD_AXIS_RIGHT_TRIGGER
+/*! @} */

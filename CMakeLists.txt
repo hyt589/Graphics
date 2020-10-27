@@ -27,6 +27,7 @@ file(GLOB OGL_SRC
     src/OpenGL/*.cpp
     src/Apps/AppOpenGL/*.cpp
     dependencies/imgui/backends/imgui_impl_opengl3.cpp
+    dependencies/imgui/backends/imgui_impl_glfw.cpp
 )
 
 include_directories(

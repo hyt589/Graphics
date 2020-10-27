@@ -1,5 +1,6 @@
 #include "Core.hpp"
 #include "SandboxLayer.hpp"
+#include "ImGuiLayer.hpp"
 
 using namespace HYT;
 
@@ -11,5 +12,6 @@ int main(int, char **)
         return true;
     });
     app->pushLayer(new OpenGL::SandboxLayer);
+    app->pushOverlay(new ImGuiLayer);
     app->run();
 }

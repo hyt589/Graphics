@@ -2,6 +2,12 @@
 
 #include "global.hpp"
 
+#ifdef __APPLE__
+#define DPI_SCALE 2.0f 
+#else
+#define DPI_SCALE 1.0f
+#endif
+
 namespace HYT
 {
 

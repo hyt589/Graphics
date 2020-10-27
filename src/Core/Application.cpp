@@ -123,19 +123,32 @@ namespace HYT
             float dt = Timer::ellapsedSeconds(m_LastFrameTime, now);
             m_LastFrameTime = now;
 
-            for (auto layer : m_layers)
+            try
             {
-                layer->onUpdate(dt);
-            }
+                for (auto layer : m_layers)
+                {
+                    layer->onUpdate(dt);
+                }
 
-            for (auto overlay : m_overlays)
+                for (auto overlay : m_overlays)
+                {
+                    overlay->onUpdate(dt);
+                }
+            }
+            catch (const std::exception &e)
             {
-                overlay->onUpdate(dt);
+                LOG_CRITICAL("[CORE] {}", e.what());
+                exit(1);
             }
 
             m_window->onUpdate();
         }
 
         LOG_INFO("[CORE] Application terminating");
+    }
+
+    Window * Application::getWindow()
+    {
+        return m_window.get();
     }
 } // namespace HYT

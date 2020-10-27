@@ -5,6 +5,14 @@ namespace HYT::OpenGL
     void SandboxLayer::init()
     {
         LOG_INFO("[SANDBOX] Layer initializing");
+
+        subscribe(EventType::CursorPosEvent, [](Event& e)->bool
+        {
+            auto pos = std::any_cast<glm::vec2>(e.getData());
+            return true;
+        });
+
+        
     }
 
     void SandboxLayer::onEvent(Event& e)

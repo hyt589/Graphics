@@ -9,6 +9,8 @@ namespace HYT
     void ImGuiLayer::init()
     {
 
+        LOG_INFO("[ImGui] Layer initializing");
+
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
 
@@ -104,6 +106,7 @@ namespace HYT
         LOG_DEBUG("Display Size: {} × {}", w, h);
         ImGui::GetIO().DisplaySize = ImVec2(w, h);
         ImGui_ImplOpenGL3_Init("#version 410");
+
     }
 
     void ImGuiLayer::onEvent(Event &e)
@@ -140,5 +143,7 @@ namespace HYT
         ImGui_ImplOpenGL3_Shutdown();
         // ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
+
+        LOG_INFO("[ImGui] Layer terminating");
     }
 } // namespace HYT

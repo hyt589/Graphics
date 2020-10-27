@@ -12,7 +12,13 @@ namespace HYT::OpenGL
             return true;
         });
 
-        
+        subscribe(EventType::WindowResizeEvent, [](Event& e)->bool
+        {
+            auto size = std::any_cast<glm::vec2>(e.getData());
+            GL(glViewport(0, 0, size.x, size.y));
+            return true;
+        });
+
     }
 
     void SandboxLayer::onEvent(Event& e)

@@ -31,6 +31,12 @@ namespace HYT
         void popLayer(Layer *layer);
 
         /**
+         * @brief Pop the top layer from the stack
+         * 
+         */
+        void popLayer();
+
+        /**
          * @brief Push an overlay onto the layer stack.
          * 
          * @param layer pointer to the overlay layer.
@@ -43,6 +49,12 @@ namespace HYT
          * @param layer overlay layer pointer to pop.
          */
         void popOverlay(Layer *layer);
+
+        /**
+         * @brief Pop the top layer from the overlay stack;
+         * 
+         */
+        void popOverlay();
 
         /**
          * @brief Subscribe to a type of event with a provided callback.

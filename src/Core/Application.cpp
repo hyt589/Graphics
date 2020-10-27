@@ -41,6 +41,15 @@ namespace HYT
         }
     }
 
+    void Application::popLayer()
+    {
+        if(!m_layers.empty())
+        {
+            m_layers.back()->terminate();
+            m_layers.pop_back();
+        }
+    }
+
     void Application::pushOverlay(Layer *layer)
     {
         m_overlays.push_back(layer);
@@ -54,6 +63,15 @@ namespace HYT
         {
             layer->terminate();
             m_overlays.erase(it);
+        }
+    }
+
+    void Application::popOverlay()
+    {
+        if(!m_overlays.empty())
+        {
+            m_overlays.back()->terminate();
+            m_overlays.pop_back();
         }
     }
 
@@ -143,6 +161,17 @@ namespace HYT
 
             m_window->onUpdate();
         }
+
+        while (!m_overlays.empty())
+        {
+            popOverlay();
+        }
+        
+        while (!m_layers.empty())
+        {
+            popLayer();
+        }
+        
 
         LOG_INFO("[CORE] Application terminating");
     }

@@ -38,3 +38,11 @@
 #include <unistd.h>
 #endif
 
+#define HYT_DEBUG_BREAK std::raise(SIGINT) 
+
+
+#ifndef NDEBUG
+#define HYT_ASSERT(condition, ...) if (!condition){LOG_ERROR("[ASSERT] {0}", __VA_ARGS__);HYT_DEBUG_BREAK;}
+#else
+#define HYT_ASSERT(condition, ...)
+#endif // !NDEBUG

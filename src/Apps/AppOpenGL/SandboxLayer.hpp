@@ -1,4 +1,5 @@
-#include "opengl.hpp"
+#include "Core.hpp"
+#include "gl_base.hpp"
 
 namespace HYT::OpenGL
 {

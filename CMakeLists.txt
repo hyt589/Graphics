@@ -18,21 +18,28 @@ set(LIB spdlog::spdlog glfw)
 
 file(GLOB CORE_SOURCE_FILES
     dependencies/glad/src/glad.c
-    src/Core/**.cpp
+    src/Core/*.cpp
     dependencies/imgui/*.cpp
 )
 
 file(GLOB OGL_SRC
-    src/OpenGL/*.cpp
+    # src/OpenGL/*.cpp
     src/Apps/AppOpenGL/*.cpp
+    src/Platforms/Backends/OpenGL/*.cpp
     dependencies/imgui/backends/imgui_impl_opengl3.cpp
+)
+
+file(GLOB MAC_SRC
+    src/Platforms/Windowing/MacGLFW/*.cpp
     dependencies/imgui/backends/imgui_impl_glfw.cpp
 )
 
 include_directories(
     src/App
     src/Core
-    src/OpenGL
+    src/Platforms/Windowing/MacGLFW
+    src/Platforms/Backends/OpenGL
+    # src/OpenGL
     src/Apps/AppOpenGL
     dependencies/glad/include
     dependencies/glm/glm
@@ -43,7 +50,7 @@ include_directories(
 
 set_source_files_properties(dependencies/glad/src/glad.c PROPERTIES SKIP_PRECOMPILE_HEADERS on)
 
-add_executable(Application_OpenGL ${CORE_SOURCE_FILES} ${OGL_SRC})
+add_executable(Application_OpenGL ${CORE_SOURCE_FILES} ${OGL_SRC} ${MAC_SRC})
 
 # target_precompile_headers(
 #     Application

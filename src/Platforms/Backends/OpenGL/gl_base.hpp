@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core.hpp"
 #include <glad/glad.h>
+
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
@@ -49,4 +49,3 @@ inline bool glCheckError_(const char * file, int line)
  * 
  */
 #define GL(glFunctionCall) glFunctionCall; glCheckError
-

@@ -6,18 +6,18 @@ namespace HYT::OpenGL
     {
         LOG_INFO("[SANDBOX] Layer initializing");
 
-        subscribe(EventType::CursorPosEvent, [](Event& e)->bool
-        {
-            auto pos = std::any_cast<glm::vec2>(e.getData());
-            return true;
-        });
+        // subscribe(EventType::CursorPosEvent, [](Event& e)->bool
+        // {
+        //     auto pos = std::any_cast<std::pair>(e.getData());
+        //     return true;
+        // });
 
-        subscribe(EventType::WindowResizeEvent, [](Event& e)->bool
-        {
-            auto size = std::any_cast<glm::vec2>(e.getData());
-            GL(glViewport(0, 0, size.x, size.y));
-            return true;
-        });
+        // subscribe(EventType::WindowResizeEvent, [](Event& e)->bool
+        // {
+        //     auto size = std::any_cast<glm::vec2>(e.getData());
+        //     GL(glViewport(0, 0, size.x, size.y));
+        //     return true;
+        // });
 
     }
 

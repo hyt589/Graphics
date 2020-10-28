@@ -19,3 +19,5 @@
 #include "Timer.hpp"
 #include "Window.hpp"
 #include "KeyCodes.hpp"
+#include "input.hpp"
+#include "RenderContext.hpp"

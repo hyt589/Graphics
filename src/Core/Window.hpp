@@ -1,6 +1,7 @@
 #pragma once
 
 #include "global.hpp"
+#include "RenderContext.hpp"
 
 #ifdef __APPLE__
 #define DPI_SCALE 2.0f 
@@ -62,6 +63,10 @@ namespace HYT
 		 */
         virtual void* GetNativeWindow() const = 0;
 
+		virtual Renderer::Context* getRenderContext() = 0;
+
+		virtual void init() = 0;
+
 		/**
 		 * @brief Static function to create an application Window; should be implemented by platform specific code.
 		 * 
@@ -72,5 +77,6 @@ namespace HYT
     protected:
 		std::string m_title;
         EventDispatcher m_eventDispatcher;
+		Renderer::Context * m_context;
     };
 } // namespace HYT

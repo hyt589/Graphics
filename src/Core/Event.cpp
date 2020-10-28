@@ -1,4 +1,5 @@
 #include "Event.hpp"
+#include "Log.hpp"
 
 namespace HYT
 {
@@ -49,6 +50,7 @@ namespace HYT
 
     void EventDispatcher::post(Event event, EventQueue &queue)
     {
+        LOG_TRACE("[EVENT] posting {}", event.to_string());
         queue.push(event);
     }
 
@@ -59,6 +61,7 @@ namespace HYT
         {
             return;
         }
+        LOG_TRACE("[EVENT] handling {}", e.to_string());
         auto callback = m_callbacks.at(type);
         e.isHandled = callback(e);
     }

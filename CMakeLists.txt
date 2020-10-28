@@ -19,7 +19,6 @@ set(LIB spdlog::spdlog glfw)
 file(GLOB CORE_SOURCE_FILES
     dependencies/glad/src/glad.c
     src/Core/**.cpp
-    src/ImGui/**.cpp
     dependencies/imgui/*.cpp
 )
 
@@ -33,7 +32,6 @@ file(GLOB OGL_SRC
 include_directories(
     src/App
     src/Core
-    src/ImGui
     src/OpenGL
     src/Apps/AppOpenGL
     dependencies/glad/include

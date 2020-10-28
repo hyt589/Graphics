@@ -29,6 +29,9 @@
 #include <unordered_set>
 #include <any>
 
+#include <thread>
+#include <future>
+
 #ifdef _WIN32
 #include <Windows.h>
 #else

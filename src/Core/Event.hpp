@@ -77,8 +77,8 @@ namespace HYT
         //@brief Attach a handle callback to an event type
         //@param type: the type enum
         //@param callback: a function that gets called when the event is handled.
-        //  A boolean value should be returned indicating weather this event is properly handled by this function.
-        //  You should not post new events in this dunction.
+        //  A boolean value should be returned indicating weather this event is consumed by this function.
+        //  You should not post new events in this callback.
         void subscribe(EventType type, EventFn callback);
 
         //@brief Post an event to an event queue

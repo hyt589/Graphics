@@ -39,14 +39,54 @@
 #include <unistd.h>
 #endif
 
-#define HYT_DEBUG_BREAK std::raise(SIGINT) 
-
+#define HYT_DEBUG_BREAK std::raise(SIGINT)
 
 #ifndef NDEBUG
-#define HYT_ASSERT(condition, ...) if (!condition){LOG_ERROR("[ASSERT_FAIL] {0}", __VA_ARGS__);HYT_DEBUG_BREAK;}
+#define HYT_ASSERT(condition, ...)                   \
+    if (!condition)                                  \
+    {                                                \
+        LOG_ERROR("[ASSERT_FAIL] {0}", __VA_ARGS__); \
+        HYT_DEBUG_BREAK;                             \
+    }
 #else
 #define HYT_ASSERT(condition, ...)
 #endif // !NDEBUG
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+//define something for Windows (32-bit and 64-bit, this part is common)
+#define HYT_PLATFORM_WIN
+#ifdef _WIN64
+#define HYT_PLATFORM_WIN64
+//define something for Windows (64-bit only)
+#else
+#define HYT_PLATFORM_WIN32
+//define something for Windows (32-bit only)
+#endif
+#elif __APPLE__
+#include <TargetConditionals.h>
+#if TARGET_IPHONE_SIMULATOR
+// iOS Simulator
+#elif TARGET_OS_IPHONE
+// iOS device
+#elif TARGET_OS_MAC
+// Other kinds of Mac OS
+#define HYT_PLATFORM_MAC_OS
+#else
+#error "Unknown Apple platform"
+#endif
+#elif __linux__
+// linux
+#define HYT_PLATFORM_LINUX
+#elif __unix__ // all unices not caught above
+// Unix
+#define HYT_PLATFORM_UNIX
+
+#elif defined(_POSIX_VERSION)
+// POSIX
+#define HYT_PLATFORM_POSIX
+#else
+#error "Unknown compiler"
+#endif
 
 namespace HYT
 {
@@ -54,23 +94,17 @@ namespace HYT
     {
         none,
         opengl,
-        // #ifndef __APPLE__
         vulkan,
-        // #endif // !__APPLE__
-        // #ifdef __WIN32__
         dx11,
         dx12,
-        // #endif // __WIN32__
-        // #ifdef __APPLE__
         metal
-        // #endif // __APPLE__
     };
 
     enum WindowAPI
     {
+        None,
         GLFW,
         WIN32
     };
-
 
 } // namespace HYT

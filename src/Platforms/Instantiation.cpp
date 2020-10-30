@@ -11,21 +11,21 @@ namespace HYT
         {
         case WindowAPI::GLFW:
         {
-#ifdef __APPLE__
+#ifdef HYT_PLATFORM_MAC_OS
             s_Instance = new MacGlfwInput();
-#endif // __APPLE__
+#endif // HYT_PLATFORM_MAC_OS
             break;
         }
         default:
         {
-            LOG_ERROR("Unsupported windowing api");
+            LOG_ERROR("Fatal error: Window API: {} not supported", std::string(magic_enum::enum_name(Window::getAPI())));
             exit(1);
             break;
         }
         }
     }
 
-    WindowAPI Window::s_api;
+    WindowAPI Window::s_api = WindowAPI::None;
 
     Window *Window::Create(const WindowProps &props, int verMajor, int verMinor)
     {
@@ -33,21 +33,43 @@ namespace HYT
 
         switch (Window::getAPI())
         {
+        case WindowAPI::None:
+            LOG_ERROR("No window API specified.");
+            LOG_ERROR("Call HYT::Window::setAPI to specify a window API before instantiating the application");
+            exit(1);
+            break;
         case WindowAPI::GLFW:
         {
-#ifdef __APPLE__
+#ifdef HYT_PLATFORM_MAC_OS
             HYT_ASSERT((verMajor * 100 + verMinor * 10 <= 410), "Apple does not support OpenGL beyond version 4.1");
             return new MacGlfwWindow(props, verMajor, verMinor);
-#endif // __APPLE__
+#endif // HYT_PLATFORM_MAC_OS
             break;
         }
 
         default:
-            LOG_CRITICAL("Fatal error: Window API: {} not supported", std::string(magic_enum::enum_name(Window::getAPI())));
+            LOG_ERROR("Fatal error: Window API: {} not supported", std::string(magic_enum::enum_name(Window::getAPI())));
             exit(1);
             break;
         }
+
+        return nullptr;
     }
+
+    Graphics::Shader *Graphics::Shader::create(std::initializer_list<ShaderSrc> shaderList)
+    {
+        switch (Graphics::Renderer::getAPI())
+        {
+        case GraphicsAPI::opengl:
+            return new OpenGL::Shader(shaderList);
+            break;
+
+        default:
+            break;
+        }
+        return nullptr;
+    }
+
 } // namespace HYT
 
 namespace HYT::Graphics
@@ -57,14 +79,14 @@ namespace HYT::Graphics
         switch (Renderer::getAPI())
         {
         case GraphicsAPI::none:
-            LOG_CRITICAL("No graphics API specified");
+            LOG_ERROR("No graphics API specified");
             LOG_ERROR("Call HYT::Graphics::Renderer::setAPI to specify an API before instantiating an application");
-            exit(0);
+            exit(1);
         case GraphicsAPI::opengl:
             return new ::HYT::OpenGL::Context(static_cast<GLFWwindow *>(APP_WINDOW->GetNativeWindow()));
             break;
         default:
-            LOG_CRITICAL("Fatal error: Graphics API: {} not supported", std::string(magic_enum::enum_name(Renderer::getAPI())));
+            LOG_ERROR("Fatal error: Graphics API: {} not supported", std::string(magic_enum::enum_name(Renderer::getAPI())));
             exit(1);
             break;
         }

@@ -7,12 +7,12 @@ using namespace HYT;
 int main(int, char **)
 {
     Graphics::Renderer::setAPI(GraphicsAPI::opengl);
+    Window::setAPI(WindowAPI::GLFW);
     auto app = Application::getInstance(
-        "wtf", 
-        1280u, 720u, 
-        4, 1
-    );
-    app->subscribe(EventType::WindowCloseEvent, [app](Event & e)->bool{
+        "wtf",
+        1280u, 720u,
+        4, 1);
+    app->subscribe(EventType::WindowCloseEvent, [app](Event &e) -> bool {
         app->setShouldRun(false);
         return true;
     });

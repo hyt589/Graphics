@@ -2,13 +2,6 @@
 #include "gl_base.hpp"
 #include <GLFW/glfw3.h>
 
-namespace HYT::Renderer
-{
-    Context * Context::createContext()
-    {
-        return new ::HYT::OpenGL::Context(static_cast<GLFWwindow*>(APP_WINDOW->GetNativeWindow()));
-    }
-} // namespace HYT::Renderer
 
 
 namespace HYT::OpenGL

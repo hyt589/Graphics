@@ -7,7 +7,7 @@ struct GLFWwindow;
 
 namespace HYT::OpenGL
 {
-    class Context : public ::HYT::Renderer::Context
+    class Context : public ::HYT::Render::Context
     {
     public:
         Context(GLFWwindow * window);

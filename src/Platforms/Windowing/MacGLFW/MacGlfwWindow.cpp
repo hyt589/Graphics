@@ -2,10 +2,6 @@
 
 namespace HYT
 {
-    Window * Window::Create(const WindowProps & props)
-    {
-        return new MacGlfwWindow(props);
-    }
 
     MacGlfwWindow::MacGlfwWindow(const WindowProps & props, int glVerMajor, int glVerMinor)
     {
@@ -110,14 +106,21 @@ namespace HYT
         return m_nativeWindow;
     }
 
-    Renderer::Context * MacGlfwWindow::getRenderContext()
+    Render::Context * MacGlfwWindow::getRenderContext()
     {
         return m_context;
     }
 
+    void MacGlfwWindow::setRenderContext(Render::Context* context)
+    {
+        delete this->m_context;
+        this->m_context = context;
+        context->init();
+    }
+
     void MacGlfwWindow::init()
     {
-        m_context = HYT::Renderer::Context::createContext();
+        m_context = HYT::Render::Context::create();
         m_context->init();
     }
 

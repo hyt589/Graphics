@@ -21,3 +21,5 @@
 #include "KeyCodes.hpp"
 #include "input.hpp"
 #include "RenderContext.hpp"
+#include "Shader.hpp"
+#include "Renderer.hpp"

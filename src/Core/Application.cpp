@@ -6,7 +6,7 @@ namespace HYT
     // EventQueue Application::s_eventQueue;
     Application *Application::s_instance;
 
-    Application *Application::getInstance(const std::string &name, uint32_t width, uint32_t height)
+    Application *Application::getInstance(const std::string &name, uint32_t width, uint32_t height, int verMajor, int verMinor)
     {
         if (!s_instance)
         {
@@ -14,7 +14,7 @@ namespace HYT
             s_instance = new Application();
             s_instance->m_initialized = true;
             Logger::init();
-            s_instance->m_window = std::unique_ptr<Window>(Window::Create(props));
+            s_instance->m_window = std::unique_ptr<Window>(Window::Create(props, verMajor, verMinor));
             s_instance->m_window->init();
             LOG_INFO("[CORE] Application instantiated.");
         }
@@ -78,7 +78,7 @@ namespace HYT
 
     void Application::setShouldRun(bool should)
     {
-        m_shouldRun = should;
+        m_running = should;
     }
 
     void Application::subscribe(EventType type, std::function<bool(Event &)> callback)
@@ -135,7 +135,7 @@ namespace HYT
             return;
         }
         // LOG_INFO("[CORE] Application starting");
-        while (m_shouldRun)
+        while (m_running)
         {
             handleEvents();
             auto now = Timer::now();

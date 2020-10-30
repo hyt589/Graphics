@@ -6,7 +6,11 @@ using namespace HYT;
 
 int main(int, char **)
 {
-    auto app = Application::getInstance();
+    auto app = Application::getInstance(
+        "GL 4.1 sandbox", 
+        1280u, 720u, 
+        4, 1
+    );
     app->subscribe(EventType::WindowCloseEvent, [app](Event & e)->bool{
         app->setShouldRun(false);
         return true;

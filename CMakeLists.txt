@@ -20,6 +20,7 @@ file(GLOB CORE_SOURCE_FILES
     dependencies/glad/src/glad.c
     src/Core/*.cpp
     dependencies/imgui/*.cpp
+    src/Platforms/Instantiation.cpp
 )
 
 file(GLOB OGL_SRC
@@ -37,6 +38,7 @@ file(GLOB MAC_SRC
 include_directories(
     src/App
     src/Core
+    src/Platforms
     src/Platforms/Windowing/MacGLFW
     src/Platforms/Backends/OpenGL
     # src/OpenGL

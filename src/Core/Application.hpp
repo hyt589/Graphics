@@ -71,6 +71,10 @@ namespace HYT
          */
         void setShouldRun(bool should);
 
+        inline bool isRunning() {return m_running;};
+
+        inline bool isInitialized(){return m_initialized;};
+
         /**
          * @brief start the application main cycle
          * 
@@ -99,7 +103,7 @@ namespace HYT
          * @param height height of application window
          * @return Application* pointer to the application instance
          */
-        static Application *getInstance(const std::string &name = "OpenGL Sandbox", uint32_t width = 1280, uint32_t height = 720);
+        static Application *getInstance(const std::string &name = "OpenGL Sandbox", uint32_t width = 1280, uint32_t height = 720, int verMajor = 4, int verMinor = 1);
 
     protected:
         /**
@@ -110,7 +114,7 @@ namespace HYT
         Application() = default;
 
         bool m_initialized = false;
-        bool m_shouldRun = true;
+        bool m_running = true;
         std::vector<Layer *> m_layers;
         std::vector<Layer *> m_overlays;
         std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTime;

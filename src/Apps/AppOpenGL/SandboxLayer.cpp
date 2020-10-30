@@ -1,4 +1,5 @@
 #include "SandboxLayer.hpp"
+#include "OpenGL.hpp"
 
 namespace HYT::OpenGL
 {
@@ -6,22 +7,21 @@ namespace HYT::OpenGL
     {
         LOG_INFO("[SANDBOX] Layer initializing");
 
-        // subscribe(EventType::CursorPosEvent, [](Event& e)->bool
-        // {
-        //     auto pos = std::any_cast<std::pair>(e.getData());
-        //     return true;
-        // });
+        subscribe(EventType::CursorPosEvent, [](Event &e) -> bool {
+            LOG_TRACE("[SANDBOX] Processing cursor pos event");
+            auto [x, y] = std::any_cast<std::pair<double, double>>(e.getData());
+            return true;
+        });
 
-        // subscribe(EventType::WindowResizeEvent, [](Event& e)->bool
-        // {
-        //     auto size = std::any_cast<glm::vec2>(e.getData());
-        //     GL(glViewport(0, 0, size.x, size.y));
-        //     return true;
-        // });
-
+        subscribe(EventType::WindowResizeEvent, [](Event &e) -> bool {
+            LOG_TRACE("[SANDBOX] Processing window resize event");
+            auto [w, h] = std::any_cast<std::pair<double, double>>(e.getData());
+            GL(glViewport(0, 0, (int)w, (int)h));
+            return true;
+        });
     }
 
-    void SandboxLayer::onEvent(Event& e)
+    void SandboxLayer::onEvent(Event &e)
     {
         m_eventDispatcher.handle(e);
     }

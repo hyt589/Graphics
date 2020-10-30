@@ -19,6 +19,7 @@
 #include <fstream>
 #include <sstream>
 #include <csignal>
+#include <initializer_list>
 
 #include <vector>
 #include <list>
@@ -46,3 +47,30 @@
 #else
 #define HYT_ASSERT(condition, ...)
 #endif // !NDEBUG
+
+namespace HYT
+{
+    enum RenderAPI
+    {
+        opengl,
+        #ifndef __APPLE__
+        vulkan,
+        #endif // !__APPLE__
+        #ifdef __WIN32__
+        dx11,
+        dx12,
+        #endif // __WIN32__
+        #ifdef __APPLE__
+        metal
+        #endif // __APPLE__
+    };
+
+    enum WindowAPI
+    {
+        GLFW
+    };
+
+    inline RenderAPI g_render_api = RenderAPI::opengl;
+    inline WindowAPI g_window_api = WindowAPI::GLFW;
+
+} // namespace HYT

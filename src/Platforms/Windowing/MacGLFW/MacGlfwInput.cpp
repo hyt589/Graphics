@@ -3,7 +3,6 @@
 
 namespace HYT
 {
-    Input *Input::s_Instance = new MacGlfwInput();
 
     bool MacGlfwInput::IsKeyPressedImpl(int keycode)
     {

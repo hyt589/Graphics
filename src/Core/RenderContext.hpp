@@ -2,14 +2,16 @@
 
 #include "global.hpp"
 
-namespace HYT::Renderer
+namespace HYT::Render
 {
     class Context
     {
         public:
         // Context(){};
+        virtual ~Context(){};
         virtual void init() = 0;
         virtual void swapBuffer() = 0;
-        static Context * createContext();
+        
+        static Context * create();
     };
 } // namespace HYT::Renderer

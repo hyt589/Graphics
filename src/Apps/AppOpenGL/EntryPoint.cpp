@@ -6,8 +6,9 @@ using namespace HYT;
 
 int main(int, char **)
 {
+    Render::Renderer::setAPI(GraphicsAPI::opengl);
     auto app = Application::getInstance(
-        "GL 4.1 sandbox", 
+        "wtf", 
         1280u, 720u, 
         4, 1
     );

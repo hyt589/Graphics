@@ -41,24 +41,31 @@ namespace HYT
         }
 
         default:
+            LOG_CRITICAL("Fatal error: Window API: {} not supported", std::string(magic_enum::enum_name(g_window_api)));
+            exit(1);
             break;
         }
     }
 } // namespace HYT
 
-
 namespace HYT::Render
 {
-    Context * Context::create()
+    Context *Context::create()
     {
         switch (Renderer::getAPI())
         {
-        case RenderAPI::opengl :
-            return new ::HYT::OpenGL::Context(static_cast<GLFWwindow*>(APP_WINDOW->GetNativeWindow()));
+        case GraphicsAPI::none:
+            LOG_CRITICAL("No graphics API specified");
+            LOG_ERROR("Call HYT::Render::Renderer::setAPI to specify an API before instantiating an application");
+            exit(0);
+        case GraphicsAPI::opengl:
+            return new ::HYT::OpenGL::Context(static_cast<GLFWwindow *>(APP_WINDOW->GetNativeWindow()));
             break;
         default:
+            LOG_CRITICAL("Fatal error: Graphics API: {} not supported", std::string(magic_enum::enum_name(Renderer::getAPI())));
+            exit(1);
             break;
         }
         return nullptr;
     }
-} // namespace HYT::Renderer
+} // namespace HYT::Render

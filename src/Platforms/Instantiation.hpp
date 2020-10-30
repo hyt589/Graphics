@@ -9,7 +9,7 @@ namespace HYT
     {
         switch (Render::Renderer::getAPI())
         {
-        case RenderAPI::opengl :
+        case GraphicsAPI::opengl :
             return new OpenGL::Shader(shaderList);
             break;
         

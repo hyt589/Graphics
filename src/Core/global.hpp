@@ -50,8 +50,9 @@
 
 namespace HYT
 {
-    enum RenderAPI
+    enum GraphicsAPI
     {
+        none,
         opengl,
         #ifndef __APPLE__
         vulkan,
@@ -70,7 +71,7 @@ namespace HYT
         GLFW
     };
 
-    inline RenderAPI g_render_api = RenderAPI::opengl;
+    inline GraphicsAPI g_render_api = GraphicsAPI::opengl;
     inline WindowAPI g_window_api = WindowAPI::GLFW;
 
 } // namespace HYT

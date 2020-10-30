@@ -71,9 +71,7 @@ namespace HYT
          */
         void setShouldRun(bool should);
 
-        inline bool isRunning() {return m_running;};
-
-        inline bool isInitialized(){return m_initialized;};
+        inline static bool isRunning() {return s_instance != nullptr;};
 
         /**
          * @brief start the application main cycle

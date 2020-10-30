@@ -3,12 +3,12 @@
 
 namespace HYT::Render
 {
-    RenderAPI Renderer::s_api = RenderAPI::opengl;
+    GraphicsAPI Renderer::s_api = GraphicsAPI::none;
 
-    void Renderer::setAPI(RenderAPI api)
+    void Renderer::setAPI(GraphicsAPI api)
     {
         s_api = api;
-        if(APP_INSTANCE->isInitialized())
+        if(Application::isRunning())
         {
             APP_WINDOW->setRenderContext(Context::create());
         }

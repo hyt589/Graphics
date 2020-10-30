@@ -6,7 +6,7 @@ using namespace HYT;
 
 int main(int, char **)
 {
-    Render::Renderer::setAPI(GraphicsAPI::opengl);
+    Graphics::Renderer::setAPI(GraphicsAPI::opengl);
     auto app = Application::getInstance(
         "wtf", 
         1280u, 720u, 

@@ -106,12 +106,12 @@ namespace HYT
         return m_nativeWindow;
     }
 
-    Render::Context * MacGlfwWindow::getRenderContext()
+    Graphics::Context * MacGlfwWindow::getRenderContext()
     {
         return m_context;
     }
 
-    void MacGlfwWindow::setRenderContext(Render::Context* context)
+    void MacGlfwWindow::setRenderContext(Graphics::Context* context)
     {
         delete this->m_context;
         this->m_context = context;
@@ -120,7 +120,7 @@ namespace HYT
 
     void MacGlfwWindow::init()
     {
-        m_context = HYT::Render::Context::create();
+        m_context = HYT::Graphics::Context::create();
         m_context->init();
     }
 

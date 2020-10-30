@@ -1,16 +1,20 @@
 #include "Renderer.hpp"
 #include "Application.hpp"
 
-namespace HYT::Render
+namespace HYT::Graphics
 {
     GraphicsAPI Renderer::s_api = GraphicsAPI::none;
 
     void Renderer::setAPI(GraphicsAPI api)
     {
-        s_api = api;
-        if(Application::isRunning())
+        if (Application::isRunning())
         {
-            APP_WINDOW->setRenderContext(Context::create());
+            EventDispatcher dispatcher;
+            dispatcher.post(Event(EventType::GraphicsApiSwitchEvent, s_api), APP_EVENT_QUEUE);
+        }
+        else
+        {
+            s_api = api;
         }
     }
-} // namespace HYT::Render
+} // namespace HYT::Graphics

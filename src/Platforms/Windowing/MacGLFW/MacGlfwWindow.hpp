@@ -13,8 +13,8 @@ namespace HYT
         virtual void onUpdate() override;
         virtual void getSize(int & w, int & h) override;
         virtual void* GetNativeWindow() const override;
-        virtual Render::Context * getRenderContext() override;
-        virtual void setRenderContext(Render::Context*) override;
+        virtual Graphics::Context * getRenderContext() override;
+        virtual void setRenderContext(Graphics::Context*) override;
         virtual void init() override;
         void post(Event e);
 

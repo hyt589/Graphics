@@ -63,9 +63,9 @@ namespace HYT
 		 */
         virtual void* GetNativeWindow() const = 0;
 
-		virtual Render::Context* getRenderContext() = 0;
+		virtual Graphics::Context* getRenderContext() = 0;
 
-		virtual void setRenderContext(Render::Context*) = 0;
+		virtual void setRenderContext(Graphics::Context*) = 0;
 
 		virtual void init() = 0;
 
@@ -76,9 +76,12 @@ namespace HYT
 		 * @return Window* 
 		 */
 		static Window* Create(const WindowProps& props = WindowProps(), int verMajor = 4, int verMinor = 1);
+		static WindowAPI getAPI(){return s_api;};
+		static void setAPI(WindowAPI api){s_api = api;};
     protected:
 		std::string m_title;
         EventDispatcher m_eventDispatcher;
-		Render::Context * m_context;
+		Graphics::Context * m_context;
+		static WindowAPI s_api;
     };
 } // namespace HYT

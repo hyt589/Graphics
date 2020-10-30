@@ -3,7 +3,7 @@
 #include "global.hpp"
 #include "Log.hpp"
 
-namespace HYT::Render
+namespace HYT::Graphics
 {
 
     enum class ShaderType

@@ -48,6 +48,7 @@ namespace HYT
         if (ImGui::Button("ClickMe"))
         {
             LOG_DEBUG("[ImGui] Button clicked");
+            Graphics::Renderer::setAPI(GraphicsAPI::vulkan);
         }
         ImGui::End();
 

@@ -7,7 +7,7 @@ namespace HYT
 
     void Input::init()
     {
-        switch (g_window_api)
+        switch (Window::getAPI())
         {
         case WindowAPI::GLFW:
         {
@@ -25,11 +25,13 @@ namespace HYT
         }
     }
 
+    WindowAPI Window::s_api;
+
     Window *Window::Create(const WindowProps &props, int verMajor, int verMinor)
     {
         Input::init();
 
-        switch (g_window_api)
+        switch (Window::getAPI())
         {
         case WindowAPI::GLFW:
         {
@@ -41,14 +43,14 @@ namespace HYT
         }
 
         default:
-            LOG_CRITICAL("Fatal error: Window API: {} not supported", std::string(magic_enum::enum_name(g_window_api)));
+            LOG_CRITICAL("Fatal error: Window API: {} not supported", std::string(magic_enum::enum_name(Window::getAPI())));
             exit(1);
             break;
         }
     }
 } // namespace HYT
 
-namespace HYT::Render
+namespace HYT::Graphics
 {
     Context *Context::create()
     {
@@ -56,7 +58,7 @@ namespace HYT::Render
         {
         case GraphicsAPI::none:
             LOG_CRITICAL("No graphics API specified");
-            LOG_ERROR("Call HYT::Render::Renderer::setAPI to specify an API before instantiating an application");
+            LOG_ERROR("Call HYT::Graphics::Renderer::setAPI to specify an API before instantiating an application");
             exit(0);
         case GraphicsAPI::opengl:
             return new ::HYT::OpenGL::Context(static_cast<GLFWwindow *>(APP_WINDOW->GetNativeWindow()));
@@ -68,4 +70,4 @@ namespace HYT::Render
         }
         return nullptr;
     }
-} // namespace HYT::Render
+} // namespace HYT::Graphics

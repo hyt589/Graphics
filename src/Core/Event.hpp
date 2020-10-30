@@ -12,7 +12,8 @@ namespace HYT
         KeyPressEvent, KeyReleaseEvent, KeyRepeatEvent,
         MouseButtonPressEvent, MouseButtonReleaseEvent, MouseButtonRepeatEvent,
         CursorPosEvent,
-        ScrollEvent
+        ScrollEvent,
+        GraphicsApiSwitchEvent
     };
 
     class Event

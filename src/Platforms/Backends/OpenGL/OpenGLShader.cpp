@@ -3,7 +3,7 @@
 
 namespace HYT::OpenGL
 {
-    using ::HYT::Render::ShaderType;
+    using ::HYT::Graphics::ShaderType;
 
     static const std::unordered_map<ShaderType, GLenum> shaderTypeMap = {
         {ShaderType::vertex, GL_VERTEX_SHADER},
@@ -14,7 +14,7 @@ namespace HYT::OpenGL
         {ShaderType::compute, GL_COMPUTE_SHADER}
     };
 
-    Shader::Shader(std::initializer_list<::HYT::Render::ShaderSrc> & shaders)
+    Shader::Shader(std::initializer_list<::HYT::Graphics::ShaderSrc> & shaders)
     {
         GL(m_id = glCreateProgram());
         std::vector<uint32_t> shaderIds;

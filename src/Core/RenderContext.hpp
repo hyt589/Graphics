@@ -2,7 +2,7 @@
 
 #include "global.hpp"
 
-namespace HYT::Render
+namespace HYT::Graphics
 {
     class Context
     {

@@ -2,7 +2,7 @@
 
 #include "global.hpp"
 
-namespace HYT::Render
+namespace HYT::Graphics
 {
     class Renderer
     {
@@ -12,4 +12,4 @@ namespace HYT::Render
     private:
         static GraphicsAPI s_api;
     };
-} // namespace HYT::Render
+} // namespace HYT::Graphics

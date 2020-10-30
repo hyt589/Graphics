@@ -5,9 +5,9 @@
 namespace HYT
 {
 
-    Render::Shader * Render::Shader::create(std::initializer_list<ShaderSrc> shaderList)
+    Graphics::Shader * Graphics::Shader::create(std::initializer_list<ShaderSrc> shaderList)
     {
-        switch (Render::Renderer::getAPI())
+        switch (Graphics::Renderer::getAPI())
         {
         case GraphicsAPI::opengl :
             return new OpenGL::Shader(shaderList);

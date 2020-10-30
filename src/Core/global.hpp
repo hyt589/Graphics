@@ -43,7 +43,7 @@
 
 
 #ifndef NDEBUG
-#define HYT_ASSERT(condition, ...) if (!condition){LOG_ERROR("[ASSERT] {0}", __VA_ARGS__);HYT_DEBUG_BREAK;}
+#define HYT_ASSERT(condition, ...) if (!condition){LOG_ERROR("[ASSERT_FAIL] {0}", __VA_ARGS__);HYT_DEBUG_BREAK;}
 #else
 #define HYT_ASSERT(condition, ...)
 #endif // !NDEBUG
@@ -54,24 +54,23 @@ namespace HYT
     {
         none,
         opengl,
-        #ifndef __APPLE__
+        // #ifndef __APPLE__
         vulkan,
-        #endif // !__APPLE__
-        #ifdef __WIN32__
+        // #endif // !__APPLE__
+        // #ifdef __WIN32__
         dx11,
         dx12,
-        #endif // __WIN32__
-        #ifdef __APPLE__
+        // #endif // __WIN32__
+        // #ifdef __APPLE__
         metal
-        #endif // __APPLE__
+        // #endif // __APPLE__
     };
 
     enum WindowAPI
     {
-        GLFW
+        GLFW,
+        WIN32
     };
 
-    inline GraphicsAPI g_render_api = GraphicsAPI::opengl;
-    inline WindowAPI g_window_api = WindowAPI::GLFW;
 
 } // namespace HYT

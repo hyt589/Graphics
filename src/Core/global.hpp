@@ -66,8 +66,10 @@
 #include <TargetConditionals.h>
 #if TARGET_IPHONE_SIMULATOR
 // iOS Simulator
+#error "Iphone simulator not supported"
 #elif TARGET_OS_IPHONE
 // iOS device
+#error "iOS devices not supported"
 #elif TARGET_OS_MAC
 // Other kinds of Mac OS
 #define HYT_PLATFORM_MAC_OS

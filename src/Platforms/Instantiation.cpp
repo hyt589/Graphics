@@ -11,9 +11,11 @@ namespace HYT
         {
         case WindowAPI::GLFW:
         {
+
 #ifdef HYT_PLATFORM_MAC_OS
             s_Instance = new MacGlfwInput();
 #endif // HYT_PLATFORM_MAC_OS
+
             break;
         }
         default:
@@ -82,9 +84,20 @@ namespace HYT::Graphics
             LOG_ERROR("No graphics API specified");
             LOG_ERROR("Call HYT::Graphics::Renderer::setAPI to specify an API before instantiating an application");
             exit(1);
+
         case GraphicsAPI::opengl:
             return new ::HYT::OpenGL::Context(static_cast<GLFWwindow *>(APP_WINDOW->GetNativeWindow()));
             break;
+
+        case GraphicsAPI::vulkan:
+
+        #ifdef HYT_PLATFORM_MAC_OS
+            LOG_ERROR("Mac OS does not support Vulkan");
+            exit(1);
+        #endif // HYT_PLATFORM_MAC_OS
+
+            break;
+
         default:
             LOG_ERROR("Fatal error: Graphics API: {} not supported", std::string(magic_enum::enum_name(Renderer::getAPI())));
             exit(1);

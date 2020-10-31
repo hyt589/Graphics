@@ -30,14 +30,17 @@ namespace HYT::Graphics
                 m_src = srcOutStream.str();
                 LOG_INFO("[SHADER] {} loaded", path);
             }
-            catch(const std::exception& e)
+            catch (const std::exception &e)
             {
                 LOG_ERROR("[SHADER] failed to load {}", path);
                 LOG_ERROR("[SHADER] {}", e.what());
             }
         };
 
-        inline const char * getSource() const
+        ShaderSrc(ShaderType shaderType, std::string src)
+            : m_path(""), m_shaderType(shaderType), m_src(src){};
+
+        inline const char *getSource() const
         {
             return m_src.c_str();
         };
@@ -52,7 +55,8 @@ namespace HYT::Graphics
             return m_shaderType;
         };
 
-        static ShaderSrc * load(std::string path, ShaderType shaderType);
+        static ShaderSrc *load(std::string path, ShaderType shaderType);
+
     protected:
         std::string m_src;
         std::string m_path;
@@ -71,8 +75,9 @@ namespace HYT::Graphics
             unbind();
         };
 
-        static Shader * create(std::initializer_list<ShaderSrc> l);
+        static Shader *create(std::initializer_list<ShaderSrc> l);
+
     protected:
         uint32_t m_id;
     };
-} // namespace HYT::Renderer
+} // namespace HYT::Graphics

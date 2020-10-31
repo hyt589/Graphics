@@ -3,7 +3,6 @@
 
 namespace HYT
 {
-    // EventQueue Application::s_eventQueue;
     Application *Application::s_instance;
 
     Application *Application::getInstance(const std::string &name, uint32_t width, uint32_t height, int verMajor, int verMinor)

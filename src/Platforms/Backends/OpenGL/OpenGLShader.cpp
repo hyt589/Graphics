@@ -5,22 +5,38 @@ namespace HYT::OpenGL
 {
     using ::HYT::Graphics::ShaderType;
 
-    static const std::unordered_map<ShaderType, GLenum> shaderTypeMap = {
-        {ShaderType::vertex, GL_VERTEX_SHADER},
-        {ShaderType::tessControl, GL_TESS_CONTROL_SHADER},
-        {ShaderType::tessEvaluation, GL_TESS_EVALUATION_SHADER},
-        {ShaderType::geometry, GL_GEOMETRY_SHADER},
-        {ShaderType::fragment, GL_FRAGMENT_SHADER},
-        {ShaderType::compute, GL_COMPUTE_SHADER}
-    };
+    static GLenum computeGLShaderType(ShaderType type)
+    {
+        switch (type)
+        {
+        case ShaderType::vertex:
+            return GL_VERTEX_SHADER;
+            break;
+        case ShaderType::tessControl:
+            return GL_TESS_CONTROL_SHADER;
+            break;
+        case ShaderType::tessEvaluation:
+            return GL_TESS_EVALUATION_SHADER;
+            break;
+        case ShaderType::geometry:
+            return GL_GEOMETRY_SHADER;
+            break;
+        case ShaderType::fragment:
+            return GL_FRAGMENT_SHADER;
+            break;
+        case ShaderType::compute:
+            return GL_COMPUTE_SHADER;
+            break;
+        }
+    }
 
-    Shader::Shader(std::initializer_list<::HYT::Graphics::ShaderSrc> & shaders)
+    Shader::Shader(std::initializer_list<::HYT::Graphics::ShaderSrc> &shaders)
     {
         GL(m_id = glCreateProgram());
         std::vector<uint32_t> shaderIds;
         for (auto &shader : shaders)
         {
-            uint32_t _shader_id = GL(glCreateShader(shaderTypeMap.at(shader.getType())));
+            uint32_t _shader_id = GL(glCreateShader(computeGLShaderType(shader.getType())));
             const char *_src_code = shader.getSource();
             GL(glShaderSource(_shader_id, 1, &_src_code, NULL));
             GL(glCompileShader(_shader_id));
@@ -52,7 +68,7 @@ namespace HYT::OpenGL
             return;
         }
         LOG_INFO("[OpenGL] Shader linking success");
-        for(auto id : shaderIds)
+        for (auto id : shaderIds)
         {
             GL(glDetachShader(m_id, id));
             GL(glDeleteShader(id));

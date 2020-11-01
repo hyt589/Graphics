@@ -39,9 +39,11 @@
 #include <unistd.h>
 #endif
 
+#define HYT_DEBUG 1
+
 #define HYT_DEBUG_BREAK std::raise(SIGINT)
 
-#ifndef NDEBUG
+#if HYT_DEBUG
 #define HYT_ASSERT(condition, ...)                   \
     if (!condition)                                  \
     {                                                \
@@ -50,7 +52,7 @@
     }
 #else
 #define HYT_ASSERT(condition, ...)
-#endif // !NDEBUG
+#endif // !HYT_DEBUG
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 //define something for Windows (32-bit and 64-bit, this part is common)

@@ -126,3 +126,4 @@ namespace HYT
 #define APP_EVENT_QUEUE ::HYT::Application::getInstance()->getEventQueue()
 #define APP_INSTANCE ::HYT::Application::getInstance()
 #define APP_WINDOW ::HYT::Application::getInstance()->getWindow()
+#define APP_NATIVE_WINDOW ::HYT::Application::getInstance()->getWindow()->GetNativeWindow()

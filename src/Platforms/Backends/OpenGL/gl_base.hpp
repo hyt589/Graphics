@@ -44,8 +44,12 @@ inline bool glCheckError_(const char * file, int line)
  */
 #define glCheckError if(glCheckError_(__FILE__, __LINE__)) std::raise(SIGINT)
 
+#if HYT_DEBUG
 /**
  * @brief Debug wrapper around OpenGL functions
  * 
  */
 #define GL(glFunctionCall) glFunctionCall; glCheckError
+#else
+#define GL(glFunctionCall)
+#endif

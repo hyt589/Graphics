@@ -5,7 +5,7 @@ namespace HYT::OpenGL
 {
     using ::HYT::Graphics::ShaderType;
 
-    static GLenum computeGLShaderType(ShaderType type)
+    static constexpr GLenum GLShaderType(ShaderType type)
     {
         switch (type)
         {
@@ -36,7 +36,7 @@ namespace HYT::OpenGL
         std::vector<uint32_t> shaderIds;
         for (auto &shader : shaders)
         {
-            uint32_t _shader_id = GL(glCreateShader(computeGLShaderType(shader.getType())));
+            uint32_t _shader_id = GL(glCreateShader(GLShaderType(shader.getType())));
             const char *_src_code = shader.getSource();
             GL(glShaderSource(_shader_id, 1, &_src_code, NULL));
             GL(glCompileShader(_shader_id));
@@ -82,6 +82,47 @@ namespace HYT::OpenGL
 
     void Shader::unbind() const
     {
+        GL(glUseProgram(0));
+    }
+
+    void Shader::setUniform(std::string name, std::any value)
+    {
+        GL(glUseProgram(m_id));
+        auto loc = GL(glGetUniformLocation(m_id, name.c_str()));
+        if (loc == -1)
+        {
+            LOG_ERROR("[OpenGL] Uniform {} not found");
+            GL(glUseProgram(0));
+            return;
+        }
+        if (value.type() == typeid(int))
+        {
+            GL(glUniform1i(loc, std::any_cast<int>(value)));
+        }
+        else if (value.type() == typeid(float))
+        {
+            GL(glUniform1f(loc, std::any_cast<float>(value)));
+        }
+        else if (value.type() == typeid(double))
+        {
+            GL(glUniform1d(loc, std::any_cast<double>(value)));
+        }
+        else if (value.type() == typeid(glm::vec3))
+        {
+            GL(glUniform3fv(loc, 1, glm::value_ptr(std::any_cast<glm::vec3>(value))));
+        }
+        else if (value.type() == typeid(glm::vec4))
+        {
+            GL(glUniform4fv(loc, 1, glm::value_ptr(std::any_cast<glm::vec4>(value))));
+        }
+        else if (value.type() == typeid(glm::mat4))
+        {
+            GL(glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(std::any_cast<glm::mat4>(value))));
+        }
+        else
+        {
+            LOG_ERROR("[OpenGL] Unknown type for shader uniform {}", name);
+        }
         GL(glUseProgram(0));
     }
 } // namespace HYT::OpenGL

@@ -9,8 +9,9 @@ namespace HYT::OpenGL
     Context::Context(GLFWwindow *window)
         : m_window(window)
     {
-        LOG_TRACE("[OpenGL] Context created");
+        HYT_ASSERT((Window::getAPI() == WindowAPI::GLFW), "Cannot create OpenGL context in non GLFW windows");
         HYT_ASSERT(window, "No window for context creation");
+        LOG_TRACE("[OpenGL] Context created");
     }
 
     void Context::init()

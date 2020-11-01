@@ -68,6 +68,7 @@ namespace HYT::Graphics
     public:
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
+        virtual void setUniform(std::string name, std::any value) = 0;
         inline void bindAndDo(std::function<void()> task)
         {
             bind();

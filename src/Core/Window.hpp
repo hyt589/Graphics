@@ -2,6 +2,7 @@
 
 #include "global.hpp"
 #include "RenderContext.hpp"
+#include "Event.hpp"
 
 #ifdef __APPLE__
 #define DPI_SCALE 2.0f 

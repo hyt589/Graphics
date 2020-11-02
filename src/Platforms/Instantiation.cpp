@@ -46,6 +46,16 @@ namespace HYT
             HYT_ASSERT((verMajor * 100 + verMinor * 10 <= 410), "Apple does not support OpenGL beyond version 4.1");
             return new MacGlfwWindow(props, verMajor, verMinor);
 #endif // HYT_PLATFORM_MAC_OS
+
+#ifdef HYT_PLATFORM_WIN
+            LOG_ERROR("Windows GLFW has not been implemented yet");
+            exit(1);
+#endif // HYT_PLATFORM_WIN
+
+#ifdef HYT_PLATFORM_LINUX
+            LOG_ERROR("Linux GLFW has not been implemented yet");
+            exit(1);
+#endif // HYT_PLATFORM_LINUX
             break;
         }
 
@@ -91,13 +101,18 @@ namespace HYT::Graphics
 
         case GraphicsAPI::vulkan:
 
-        #ifdef HYT_PLATFORM_MAC_OS
+#ifdef HYT_PLATFORM_MAC_OS
             LOG_ERROR("Mac OS does not support Vulkan");
             exit(1);
-        #endif // HYT_PLATFORM_MAC_OS
+#endif // HYT_PLATFORM_MAC_OS
 
             break;
-
+        case GraphicsAPI::dx11:
+#ifndef HYT_PLATFORM_WIN
+            LOG_ERROR("DirectX 11 is only supported on Windows platforms");
+            exit(1);
+#endif // !HYT_PLATFORM_WIN
+            break;
         default:
             LOG_ERROR("Fatal error: Graphics API: {} not supported", std::string(magic_enum::enum_name(Renderer::getAPI())));
             exit(1);

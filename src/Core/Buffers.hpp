@@ -3,7 +3,7 @@
 #include "Log.hpp"
 #include <magic_enum.hpp>
 
-namespace HYT
+namespace HYT::Graphics
 {
     enum class ElementDataType
     {

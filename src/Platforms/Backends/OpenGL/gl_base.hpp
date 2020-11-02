@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glad/glad.h>
+#include "Core.hpp"
 
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
@@ -51,5 +52,5 @@ inline bool glCheckError_(const char * file, int line)
  */
 #define GL(glFunctionCall) glFunctionCall; glCheckError
 #else
-#define GL(glFunctionCall)
+#define GL(glFunctionCall) glFunctionCall
 #endif

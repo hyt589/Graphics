@@ -24,3 +24,4 @@
 #include "Shader.hpp"
 #include "Renderer.hpp"
 #include "Buffers.hpp"
+#include "VertexArray.hpp"

@@ -13,7 +13,6 @@ namespace HYT::Graphics
             break;
 
         default:
-
             LOG_ERROR("Graphics API: {} is not supported", magic_enum::enum_name(Renderer::getAPI()));
             exit(1);
             break;

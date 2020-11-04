@@ -14,7 +14,8 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(dependencies/spdlog)
 add_subdirectory(dependencies/glfw)
 
-set(LIB spdlog::spdlog glfw)
+find_package(vulkan)
+set(LIB spdlog::spdlog glfw Vulkan::Vulkan)
 
 file(GLOB CORE_SOURCE_FILES
     dependencies/glad/src/glad.c

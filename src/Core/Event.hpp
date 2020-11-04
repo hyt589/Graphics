@@ -86,6 +86,8 @@ namespace HYT
         //@param event: the event instance to post
         //@param queue: the reference to the event queue where the event will be posted
         void post(Event event, EventQueue & queue);
+        
+        static void StaticPost(Event event, EventQueue & queue);
 
         //@brief handle an event according to subscribed callbacks
         //@param event: the reference to the event being handled

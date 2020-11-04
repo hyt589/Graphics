@@ -53,6 +53,12 @@ namespace HYT
         LOG_TRACE("[EVENT] posting {}", event.to_string());
         queue.push(event);
     }
+    
+    void EventDispatcher::StaticPost(Event event, EventQueue & queue) 
+    {
+        LOG_TRACE("[EVENT] posting {}", event.to_string());
+        queue.push(event);
+    }
 
     void EventDispatcher::handle(Event &e)
     {

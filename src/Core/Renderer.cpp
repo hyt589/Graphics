@@ -9,8 +9,7 @@ namespace HYT::Graphics
     {
         if (Application::isRunning())
         {
-            EventDispatcher dispatcher;
-            dispatcher.post(Event(EventType::GraphicsApiSwitchEvent, s_api), APP_EVENT_QUEUE);
+            EventDispatcher::StaticPost(Event(EventType::GraphicsApiSwitchEvent, s_api), APP_EVENT_QUEUE);
         }
         else
         {

@@ -101,7 +101,8 @@ namespace HYT
         vulkan,
         dx11,
         dx12,
-        metal
+        metal,
+        molten
     };
 
     enum WindowAPI

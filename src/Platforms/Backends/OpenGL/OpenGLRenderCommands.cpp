@@ -2,7 +2,7 @@
 
 namespace HYT::OpenGL
 {
-    void RenderCommands::init() 
+    void RenderBackend::init() 
     {
         GL(glEnable(GL_BLEND));
 		GL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
@@ -10,25 +10,25 @@ namespace HYT::OpenGL
 		GL(glEnable(GL_DEPTH_TEST));
     }
     
-    void RenderCommands::setClearColor(float r, float g, float b, float a) 
+    void RenderBackend::setClearColor(float r, float g, float b, float a) 
     {
         LOG_TRACE("[OpenGL] Setting clear color: ({}, {}, {}, {})", r, g, b, a);
         GL(glClearColor(r, g, b, a));
     }
     
-    void RenderCommands::clear(int bits) 
+    void RenderBackend::clear(int bits) 
     {
         LOG_TRACE("[OpenGL] Clearing Color");
         GL(glClear(bits));
     }
     
-    void RenderCommands::setViewPort(int x, int y, int width, int height) 
+    void RenderBackend::setViewPort(int x, int y, int width, int height) 
     {
         LOG_TRACE("[OpenGL] Setting viewport: ({}, {}, {}, {})", x, y, width, height);
         GL(glViewport(x, y, width, height));
     }
     
-    void RenderCommands::drawIndexed(const std::shared_ptr<::HYT::Graphics::VertexArray> &vertexArray, uint32_t count) 
+    void RenderBackend::drawIndexed(const std::shared_ptr<::HYT::Graphics::VertexArray> &vertexArray, uint32_t count) 
     {
         uint32_t indexCount = count ? count : vertexArray->getIndexBuffer()->getCount();
         LOG_TRACE("[OpenGL] Drawing {} indexed elements", indexCount);

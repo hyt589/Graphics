@@ -6,10 +6,10 @@
 namespace HYT::OpenGL
 {
 
-    class RenderCommands : public ::HYT::Graphics::RenderCommands
+    class RenderBackend : public ::HYT::Graphics::RenderBackend
     {
     public:
-        virtual ~RenderCommands() = default;
+        virtual ~RenderBackend() = default;
 
         virtual void init() override;
         virtual void setClearColor(float r, float g, float b, float a) override;

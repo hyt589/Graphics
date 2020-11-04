@@ -10,4 +10,5 @@ namespace HYT
 		s_logger = spdlog::stdout_color_mt("HYT");
 		s_logger->set_level(spdlog::level::trace);
     }
+    
 } // namespace HYT

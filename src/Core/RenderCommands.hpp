@@ -5,10 +5,10 @@
 
 namespace HYT::Graphics
 {
-    class RenderCommands
+    class RenderBackend
     {
     public:
-        virtual ~RenderCommands() = default;
+        virtual ~RenderBackend() = default;
 
         virtual void init() = 0;
         virtual void setClearColor(float r, float g, float b, float a) = 0;
@@ -17,7 +17,19 @@ namespace HYT::Graphics
 
         virtual void drawIndexed(const std::shared_ptr<VertexArray> &vertexArray, uint32_t count = 0) = 0;
 
-        static std::unique_ptr<RenderCommands> create();
+        static std::unique_ptr<RenderBackend> create();
         
+    };
+
+    class RenderCommands
+    {
+        public:
+        static void Init();
+        static void SetClearColor(float r, float g, float b, float a);
+        static void Clear(int bits);
+        static void SetViewport(int x, int y, int width, int height);
+        static void DrawIndexed(const std::shared_ptr<VertexArray> &vertexArray, uint32_t count = 0);
+        private:
+        static std::unique_ptr<RenderBackend> s_backend;
     };
 } // namespace HYT

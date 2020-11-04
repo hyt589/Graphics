@@ -33,8 +33,9 @@ namespace HYT::OpenGL
 
     void SandboxLayer::onUpdate(float dt)
     {
-        GL(glClearColor(0.1f, 0.1f, 0.1f, 1.f));
-        GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+        Graphics::RenderCommands::Init();
+        Graphics::RenderCommands::SetClearColor(0.1f, 0.1f, 0.1f, 1.f);
+        Graphics::RenderCommands::Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     }
 } // namespace HYT::OpenGL

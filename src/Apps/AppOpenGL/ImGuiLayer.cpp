@@ -31,8 +31,35 @@ namespace HYT
             style.Colors[ImGuiCol_WindowBg].w = 1.0f;
         }
 
-        ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow *>(APP_WINDOW->GetNativeWindow()), true);
-        ImGui_ImplOpenGL3_Init("#version 410");
+        switch (Window::getAPI())
+        {
+        case WindowAPI::GLFW:
+            switch (Graphics::Renderer::getAPI())
+            {
+            case GraphicsAPI::opengl:
+                ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow *>(APP_WINDOW->GetNativeWindow()), true);
+                ImGui_ImplOpenGL3_Init("#version 410");
+                break;
+
+            case GraphicsAPI::vulkan:
+                // ImGui_ImplGlfw_InitForVulkan(static_cast<GLFWwindow*>(APP_NATIVE_WINDOW), true);
+                // ImGui_ImplVulkan_Init()
+                LOG_ERROR("Vulkan support not implemented yet");
+                exit(1);
+                break;
+
+            default:
+                LOG_ERROR("GLFW does not support {}", magic_enum::enum_name(Graphics::Renderer::getAPI()));
+                exit(1);
+                break;
+            }
+            break;
+
+        default:
+            LOG_ERROR("WindowAPI: {}", magic_enum::enum_name(Window::getAPI()));
+            exit(1);
+            break;
+        }
     }
 
     void ImGuiLayer::onEvent(Event &e)
@@ -58,8 +85,30 @@ namespace HYT
 
     void ImGuiLayer::terminate()
     {
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
+        switch (Graphics::Renderer::getAPI())
+        {
+        case GraphicsAPI::opengl:
+            ImGui_ImplOpenGL3_Shutdown();
+            break;
+        
+        default:
+            LOG_ERROR("{} is not supported", magic_enum::enum_name(Graphics::Renderer::getAPI()));
+            exit(1);
+            break;
+        }
+
+        switch (Window::getAPI())
+        {
+        case WindowAPI::GLFW:
+            ImGui_ImplGlfw_Shutdown();
+            break;
+
+        default:
+            LOG_ERROR("WindowAPI: {} is not supported", magic_enum::enum_name(Window::getAPI()));
+            exit(1);
+            break;
+        }
+
         ImGui::DestroyContext();
 
         LOG_INFO("[ImGui] Layer terminating");
@@ -67,21 +116,64 @@ namespace HYT
 
     void ImGuiLayer::begin()
     {
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
+        switch (Graphics::Renderer::getAPI())
+        {
+        case GraphicsAPI::opengl:
+            ImGui_ImplOpenGL3_NewFrame();
+            break;
+
+        default:
+            LOG_ERROR("Support for {} not implemented", magic_enum::enum_name(Graphics::Renderer::getAPI()));
+            exit(1);
+            break;
+        }
+
+        switch (Window::getAPI())
+        {
+        case WindowAPI::GLFW:
+            ImGui_ImplGlfw_NewFrame();
+            break;
+
+        default:
+            LOG_ERROR("WindowAPI: {} is not supported", magic_enum::enum_name(Window::getAPI()));
+            exit(1);
+            break;
+        }
+
         ImGui::NewFrame();
     }
 
     void ImGuiLayer::end()
     {
         ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        switch (Graphics::Renderer::getAPI())
         {
-            GLFWwindow *backup_current_context = glfwGetCurrentContext();
-            ImGui::UpdatePlatformWindows();
-            ImGui::RenderPlatformWindowsDefault();
-            glfwMakeContextCurrent(backup_current_context);
+        case GraphicsAPI::opengl:
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            break;
+
+        default:
+            LOG_ERROR("{} is not supported", magic_enum::enum_name(Graphics::Renderer::getAPI()));
+            exit(1);
+            break;
+        }
+
+        switch (Window::getAPI())
+        {
+        case WindowAPI::GLFW:
+            if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+            {
+                GLFWwindow *backup_current_context = glfwGetCurrentContext();
+                ImGui::UpdatePlatformWindows();
+                ImGui::RenderPlatformWindowsDefault();
+                glfwMakeContextCurrent(backup_current_context);
+            }
+            break;
+
+        default:
+            LOG_ERROR("Unsupported WSI");
+            exit(0);
+            break;
         }
     }
 } // namespace HYT

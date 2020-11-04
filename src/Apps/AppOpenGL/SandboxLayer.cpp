@@ -15,7 +15,7 @@ namespace HYT::OpenGL
 
         subscribe(EventType::WindowResizeEvent, [](Event &e) -> bool {
             LOG_TRACE("[SANDBOX] Processing window resize event");
-            auto [w, h] = std::any_cast<std::pair<double, double>>(e.getData());
+            auto [w, h] = std::any_cast<std::pair<int, int>>(e.getData());
             GL(glViewport(0, 0, (int)w, (int)h));
             return true;
         });

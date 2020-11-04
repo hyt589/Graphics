@@ -50,6 +50,7 @@ namespace HYT
             LOG_DEBUG("[ImGui] Button clicked");
             Graphics::Renderer::setAPI(GraphicsAPI::vulkan);
         }
+        ImGui::Text("%.1f fps", 1.f / seconds);
         ImGui::End();
 
         end();

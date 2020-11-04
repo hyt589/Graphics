@@ -35,5 +35,6 @@ namespace HYT::OpenGL
     {
         GL(glClearColor(0.1f, 0.1f, 0.1f, 1.f));
         GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+
     }
 } // namespace HYT::OpenGL

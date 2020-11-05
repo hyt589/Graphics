@@ -34,6 +34,7 @@ file(GLOB OGL_SRC
 file(GLOB MAC_SRC
     src/Platforms/Windowing/MacGLFW/*.cpp
     dependencies/imgui/backends/imgui_impl_glfw.cpp
+    dependencies/imgui/backends/imgui_impl_vulkan.cpp
 )
 
 include_directories(

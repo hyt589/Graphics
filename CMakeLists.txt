@@ -21,7 +21,6 @@ file(GLOB CORE_SOURCE_FILES
     dependencies/glad/src/glad.c
     src/Core/*.cpp
     dependencies/imgui/*.cpp
-    src/Platforms/Instantiation.cpp
 )
 
 file(GLOB OGL_SRC

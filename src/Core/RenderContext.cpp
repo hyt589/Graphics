@@ -3,7 +3,7 @@
 
 namespace HYT::Graphics
 {
-    Context *Context::create()
+    Scoped<Context> Context::create()
     {
         switch (Renderer::getAPI())
         {
@@ -13,7 +13,7 @@ namespace HYT::Graphics
             exit(1);
 
         case GraphicsAPI::opengl:
-            return new ::HYT::OpenGL::Context(static_cast<GLFWwindow *>(APP_WINDOW->GetNativeWindow()));
+            return  CreateScoped<::HYT::OpenGL::Context>(static_cast<GLFWwindow *>(APP_WINDOW->GetNativeWindow()));
             break;
 
         case GraphicsAPI::vulkan:

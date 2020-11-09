@@ -12,6 +12,6 @@ namespace HYT::Graphics
         virtual void init() = 0;
         virtual void swapBuffer() = 0;
         
-        static Context * create();
+        static Scoped<Context> create();
     };
 } // namespace HYT::Renderer

@@ -2,7 +2,7 @@
 
 namespace HYT
 {
-    std::shared_ptr<spdlog::logger> Logger::s_logger;
+    RefCounted<spdlog::logger> Logger::s_logger;
 
     void Logger::init()
     {

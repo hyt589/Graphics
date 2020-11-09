@@ -106,15 +106,14 @@ namespace HYT
         return m_nativeWindow;
     }
 
-    Graphics::Context * MacGlfwWindow::getRenderContext()
+    Scoped<Graphics::Context> & MacGlfwWindow::getRenderContext()
     {
         return m_context;
     }
 
-    void MacGlfwWindow::setRenderContext(Graphics::Context* context)
+    void MacGlfwWindow::setRenderContext(Graphics::Context * context)
     {
-        delete this->m_context;
-        this->m_context = context;
+        this->m_context = Scoped<Graphics::Context>(context);
         context->init();
     }
 

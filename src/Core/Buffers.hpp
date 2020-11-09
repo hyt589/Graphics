@@ -121,8 +121,8 @@ namespace HYT::Graphics
         virtual const BufferLayout& getLayout() const = 0;
         virtual void setLayout(BufferLayout& layout) = 0;
 
-        static std::shared_ptr<VertexBuffer> Create(uint32_t size);
-        static std::shared_ptr<VertexBuffer> Create(float * vertices, uint32_t size);
+        static RefCounted<VertexBuffer> Create(uint32_t size);
+        static RefCounted<VertexBuffer> Create(float * vertices, uint32_t size);
     };
 
     class IndexBuffer
@@ -135,7 +135,7 @@ namespace HYT::Graphics
 
         virtual uint32_t getCount() const = 0;
 
-        static std::shared_ptr<IndexBuffer> Create(uint32_t * indices, uint32_t count);
+        static RefCounted<IndexBuffer> Create(uint32_t * indices, uint32_t count);
 
     };
 

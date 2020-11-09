@@ -17,7 +17,7 @@ namespace HYT::Graphics
 
         virtual void drawIndexed(const std::shared_ptr<VertexArray> &vertexArray, uint32_t count = 0) = 0;
 
-        static std::unique_ptr<RenderBackend> create();
+        static Scoped<RenderBackend> create();
         
     };
 
@@ -30,6 +30,6 @@ namespace HYT::Graphics
         static void SetViewport(int x, int y, int width, int height);
         static void DrawIndexed(const std::shared_ptr<VertexArray> &vertexArray, uint32_t count = 0);
         private:
-        static std::unique_ptr<RenderBackend> s_backend;
+        static Scoped<RenderBackend> s_backend;
     };
 } // namespace HYT

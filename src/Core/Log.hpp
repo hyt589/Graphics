@@ -23,12 +23,12 @@ namespace HYT
         /**
          * @brief get the pointer of the logger
          * 
-         * @return std::shared_ptr<spdlog::logger>& 
+         * @return RefCounted<spdlog::logger>& 
          */
-        inline static std::shared_ptr<spdlog::logger> &get() { return s_logger; };
+        inline static RefCounted<spdlog::logger> &get() { return s_logger; };
 
     protected:
-        static std::shared_ptr<spdlog::logger> s_logger;
+        static RefCounted<spdlog::logger> s_logger;
     };
 } // namespace HYT
 

@@ -13,7 +13,7 @@ namespace HYT
             s_instance = new Application();
             s_instance->m_initialized = true;
             Logger::init();
-            s_instance->m_window = std::unique_ptr<Window>(Window::Create(props, verMajor, verMinor));
+            s_instance->m_window = Window::Create(props, verMajor, verMinor);
             s_instance->m_window->init();
             LOG_INFO("[CORE] Application instantiated.");
         }

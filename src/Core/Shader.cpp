@@ -3,15 +3,16 @@
 
 namespace HYT
 {
-    Graphics::Shader *Graphics::Shader::create(std::initializer_list<ShaderSrc> shaderList)
+    RefCounted<Graphics::Shader> Graphics::Shader::create(std::initializer_list<ShaderSrc> shaderList)
     {
         switch (Graphics::Renderer::getAPI())
         {
         case GraphicsAPI::opengl:
-            return new OpenGL::Shader(shaderList);
+            return  CreateRefCounted<OpenGL::Shader>(shaderList);
             break;
 
         default:
+            HYT_ASSERT(false, "Graphics API: {} not supported", magic_enum::enum_name(Graphics::Renderer::getAPI()));
             break;
         }
         return nullptr;

@@ -5,12 +5,12 @@
 
 namespace HYT::Graphics
 {
-    std::unique_ptr<RenderBackend> RenderBackend::create()
+    Scoped<RenderBackend> RenderBackend::create()
     {
         switch (Renderer::getAPI())
         {
         case GraphicsAPI::opengl:
-            return std::make_unique<::HYT::OpenGL::RenderBackend>();
+            return CreateScoped<::HYT::OpenGL::RenderBackend>();
             break;
         
         default:
@@ -20,7 +20,7 @@ namespace HYT::Graphics
         }
     }
     
-    std::unique_ptr<RenderBackend> RenderCommands::s_backend;
+    Scoped<RenderBackend> RenderCommands::s_backend;
 
     void RenderCommands::Init() 
     {

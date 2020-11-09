@@ -5,7 +5,7 @@ namespace HYT
 {
     WindowAPI Window::s_api = WindowAPI::None;
     
-    Window *Window::Create(const WindowProps &props, int verMajor, int verMinor)
+    Scoped<Window> Window::Create(const WindowProps &props, int verMajor, int verMinor)
     {
         Input::init();
 
@@ -20,7 +20,7 @@ namespace HYT
         {
 #ifdef HYT_PLATFORM_MAC_OS
             HYT_ASSERT((verMajor * 100 + verMinor * 10 <= 410), "Apple does not support OpenGL beyond version 4.1");
-            return new MacGlfwWindow(props, verMajor, verMinor);
+            return CreateScoped<MacGlfwWindow>(props, verMajor, verMinor);
 #endif // HYT_PLATFORM_MAC_OS
 
 #ifdef HYT_PLATFORM_WIN

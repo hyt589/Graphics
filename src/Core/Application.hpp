@@ -116,7 +116,7 @@ namespace HYT
         std::vector<Layer *> m_layers;
         std::vector<Layer *> m_overlays;
         std::chrono::time_point<std::chrono::steady_clock> m_LastFrameTime;
-        std::unique_ptr<Window> m_window;
+        Scoped<Window> m_window;
         EventQueue m_eventQueue;
         EventDispatcher m_dispatcher;
         static Application *s_instance;

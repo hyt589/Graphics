@@ -112,4 +112,20 @@ namespace HYT
         WIN32
     };
 
+    template<typename T>
+	using Scoped = std::unique_ptr<T>;
+	template<typename T, typename ... Args>
+	constexpr Scoped<T> CreateScoped(Args&& ... args)
+	{
+		return std::make_unique<T>(std::forward<Args>(args)...);
+	}
+
+    template<typename T>
+	using RefCounted = std::shared_ptr<T>;
+	template<typename T, typename ... Args>
+	constexpr RefCounted<T> CreateRefCounted(Args&& ... args)
+	{
+		return std::make_shared<T>(std::forward<Args>(args)...);
+	}
+
 } // namespace HYT

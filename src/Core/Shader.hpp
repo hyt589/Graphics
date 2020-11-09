@@ -76,7 +76,7 @@ namespace HYT::Graphics
             unbind();
         };
 
-        static Shader *create(std::initializer_list<ShaderSrc> l);
+        static RefCounted<Shader> create(std::initializer_list<ShaderSrc> l);
 
     protected:
         uint32_t m_id;

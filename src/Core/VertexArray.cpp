@@ -8,12 +8,12 @@ namespace HYT::Graphics
 {
     using namespace HYT;
 
-    std::shared_ptr<VertexArray> VertexArray::create() 
+    RefCounted<VertexArray> VertexArray::create() 
     {
         switch (Renderer::getAPI())
         {
         case GraphicsAPI::opengl:
-            return std::make_shared<OpenGL::VertexArray>();
+            return CreateRefCounted<OpenGL::VertexArray>();
             break;
         
         default:

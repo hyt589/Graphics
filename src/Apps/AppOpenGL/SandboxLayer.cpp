@@ -1,7 +1,7 @@
 #include "SandboxLayer.hpp"
 #include "OpenGL.hpp"
 
-namespace HYT::OpenGL
+namespace HYT
 {
     void SandboxLayer::init()
     {

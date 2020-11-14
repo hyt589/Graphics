@@ -28,7 +28,7 @@ namespace HYT::OpenGL
         GL(glViewport(x, y, width, height));
     }
     
-    void RenderBackend::drawIndexed(const std::shared_ptr<::HYT::Graphics::VertexArray> &vertexArray, uint32_t count) 
+    void RenderBackend::drawIndexed(const Shared<::HYT::Graphics::VertexArray> &vertexArray, uint32_t count) 
     {
         uint32_t indexCount = count ? count : vertexArray->getIndexBuffer()->getCount();
         LOG_TRACE("[OpenGL] Drawing {} indexed elements", indexCount);

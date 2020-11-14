@@ -9,15 +9,20 @@ namespace HYT
     {
         if (!s_instance)
         {
-            WindowProps props(name, width, height);
-            s_instance = new Application();
-            s_instance->m_initialized = true;
-            Logger::init();
-            s_instance->m_window = Window::Create(props, verMajor, verMinor);
-            s_instance->m_window->init();
-            LOG_INFO("[CORE] Application instantiated.");
+            Create(name, width, height, verMajor, verMinor);
         }
         return s_instance;
+    }
+
+    void Application::Create(const std::string &name, uint32_t width, uint32_t height, int verMajor, int verMinor)
+    {
+        WindowProps props(name, width, height);
+        s_instance = new Application();
+        s_instance->m_initialized = true;
+        Logger::init();
+        s_instance->m_window = Window::Create(props, verMajor, verMinor);
+        s_instance->m_window->init();
+        LOG_INFO("[CORE] Application instantiated.");
     }
 
     EventQueue &Application::getEventQueue()
@@ -43,7 +48,7 @@ namespace HYT
 
     void Application::popLayer()
     {
-        if(!m_layers.empty())
+        if (!m_layers.empty())
         {
             m_layers.back()->terminate();
             m_layers.pop_back();
@@ -68,7 +73,7 @@ namespace HYT
 
     void Application::popOverlay()
     {
-        if(!m_overlays.empty())
+        if (!m_overlays.empty())
         {
             m_overlays.back()->terminate();
             m_overlays.pop_back();
@@ -166,17 +171,16 @@ namespace HYT
         {
             popOverlay();
         }
-        
+
         while (!m_layers.empty())
         {
             popLayer();
         }
-        
 
         LOG_INFO("[CORE] Application terminating");
     }
 
-    Window * Application::getWindow()
+    Window *Application::getWindow()
     {
         return m_window.get();
     }

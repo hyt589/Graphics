@@ -48,7 +48,7 @@ namespace HYT::OpenGL
         GL(glBindVertexArray(0));
     }
     
-    void VertexArray::addVertexBuffer(const std::shared_ptr<Graphics::VertexBuffer> & vertexBuffer) 
+    void VertexArray::addVertexBuffer(const Shared<Graphics::VertexBuffer> & vertexBuffer) 
     {
         HYT_ASSERT(vertexBuffer->getLayout().getElements().size(), "Vertex Buffer has no layout!");
 
@@ -75,7 +75,7 @@ namespace HYT::OpenGL
         GL(glBindVertexArray(0));
     }
     
-    void VertexArray::setIndexBuffer(const std::shared_ptr<Graphics::IndexBuffer> & indexBuffer) 
+    void VertexArray::setIndexBuffer(const Shared<Graphics::IndexBuffer> & indexBuffer) 
     {
         GL(glBindVertexArray(m_rendererID));
         indexBuffer->bind();

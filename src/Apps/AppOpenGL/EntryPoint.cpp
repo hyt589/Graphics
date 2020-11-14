@@ -16,7 +16,7 @@ int main(int, char **)
         app->setShouldRun(false);
         return true;
     });
-    app->pushLayer(new OpenGL::SandboxLayer);
+    app->pushLayer(new SandboxLayer);
     app->pushOverlay(new ImGuiLayer);
     app->run();
 }

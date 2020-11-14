@@ -16,6 +16,6 @@ namespace HYT::OpenGL
         virtual void clear(int bits) override;
         virtual void setViewPort(int x, int y, int width, int height) override;
 
-        virtual void drawIndexed(const std::shared_ptr<::HYT::Graphics::VertexArray> &vertexArray, uint32_t count = 0) override;
+        virtual void drawIndexed(const Shared<::HYT::Graphics::VertexArray> &vertexArray, uint32_t count = 0) override;
     };
 } // namespace HYT::OpenGL

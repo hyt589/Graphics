@@ -103,6 +103,8 @@ namespace HYT
          */
         static Application *getInstance(const std::string &name = "OpenGL Sandbox", uint32_t width = 1280, uint32_t height = 720, int verMajor = 4, int verMinor = 1);
 
+        static void Create(const std::string &name = "OpenGL Sandbox", uint32_t width = 1280, uint32_t height = 720, int verMajor = 4, int verMinor = 1);
+
     protected:
         /**
          * @brief handle events in the event queue

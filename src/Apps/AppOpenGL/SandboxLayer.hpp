@@ -1,6 +1,6 @@
 #include "Core.hpp"
 
-namespace HYT::OpenGL
+namespace HYT
 {
     class SandboxLayer : public Layer
     {

@@ -13,12 +13,12 @@ namespace HYT::Graphics
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
 
-        virtual void addVertexBuffer(const RefCounted<VertexBuffer> & vertexBuffer) = 0;
-        virtual void setIndexBuffer(const RefCounted<IndexBuffer> & indexBuffer) = 0;
+        virtual void addVertexBuffer(const Shared<VertexBuffer> & vertexBuffer) = 0;
+        virtual void setIndexBuffer(const Shared<IndexBuffer> & indexBuffer) = 0;
 
-        virtual const std::vector<RefCounted<VertexBuffer>> & getVertexBuffer() const = 0;
-        virtual const RefCounted<IndexBuffer> & getIndexBuffer() const = 0;
+        virtual const std::vector<Shared<VertexBuffer>> & getVertexBuffer() const = 0;
+        virtual const Shared<IndexBuffer> & getIndexBuffer() const = 0;
 
-        static RefCounted<VertexArray> create();
+        static Shared<VertexArray> create();
     };
 } // namespace HYT::Graphics

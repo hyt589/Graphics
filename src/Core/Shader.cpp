@@ -3,12 +3,12 @@
 
 namespace HYT
 {
-    RefCounted<Graphics::Shader> Graphics::Shader::create(std::initializer_list<ShaderSrc> shaderList)
+    Shared<Graphics::Shader> Graphics::Shader::create(std::initializer_list<ShaderSrc> shaderList)
     {
         switch (Graphics::Renderer::getAPI())
         {
         case GraphicsAPI::opengl:
-            return  CreateRefCounted<OpenGL::Shader>(shaderList);
+            return  CreateShared<OpenGL::Shader>(shaderList);
             break;
 
         default:

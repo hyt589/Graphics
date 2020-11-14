@@ -2,7 +2,7 @@
 
 namespace HYT
 {
-    RefCounted<spdlog::logger> Logger::s_logger;
+    Shared<spdlog::logger> Logger::s_logger;
 
     void Logger::init()
     {

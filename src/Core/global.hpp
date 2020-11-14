@@ -121,9 +121,9 @@ namespace HYT
 	}
 
     template<typename T>
-	using RefCounted = std::shared_ptr<T>;
+	using Shared = std::shared_ptr<T>;
 	template<typename T, typename ... Args>
-	constexpr RefCounted<T> CreateRefCounted(Args&& ... args)
+	constexpr Shared<T> CreateShared(Args&& ... args)
 	{
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}

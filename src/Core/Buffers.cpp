@@ -4,12 +4,12 @@
 
 namespace HYT::Graphics
 {
-    RefCounted<VertexBuffer> VertexBuffer::Create(uint32_t size)
+    Shared<VertexBuffer> VertexBuffer::Create(uint32_t size)
     {
         switch (Renderer::getAPI())
         {
         case GraphicsAPI::opengl:
-            return CreateRefCounted<::HYT::OpenGL::VertextBuffer>(size);
+            return CreateShared<::HYT::OpenGL::VertextBuffer>(size);
             break;
 
         default:
@@ -19,12 +19,12 @@ namespace HYT::Graphics
         }
     }
 
-    RefCounted<VertexBuffer> VertexBuffer::Create(float *vertices, uint32_t size)
+    Shared<VertexBuffer> VertexBuffer::Create(float *vertices, uint32_t size)
     {
         switch (Renderer::getAPI())
         {
         case GraphicsAPI::opengl:
-            return CreateRefCounted<::HYT::OpenGL::VertextBuffer>(vertices, size);
+            return CreateShared<::HYT::OpenGL::VertextBuffer>(vertices, size);
             break;
 
         default:
@@ -34,12 +34,12 @@ namespace HYT::Graphics
         }
     }
 
-    RefCounted<IndexBuffer> IndexBuffer::Create(uint32_t *indices, uint32_t count)
+    Shared<IndexBuffer> IndexBuffer::Create(uint32_t *indices, uint32_t count)
     {
         switch (Renderer::getAPI())
         {
         case GraphicsAPI::opengl:
-            return CreateRefCounted<::HYT::OpenGL::IndexBuffer>(indices, count);
+            return CreateShared<::HYT::OpenGL::IndexBuffer>(indices, count);
             break;
 
         default:
